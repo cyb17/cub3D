@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/05 16:27:52 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/06 11:13:05 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_img
 
 typedef struct s_element
 {
+	int		exist
+	char	*str;
 	char	*id;
 	char	*info_sp;
 	t_img	*img;
