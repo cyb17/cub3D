@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/05 16:33:06 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/12 18:04:12 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 static void	free_element(t_element *element, t_map *map)
 {
-	if (!element)
-		return;
-	if (element->id)
-		free(element->id);
-	if (element->info_sp)
-		free(element->info_sp);
+	if (element->info)
+		free(element->info);
 	if (element->img)
 	{
 		if (element->img->imgptr)
@@ -59,5 +55,6 @@ void	garbage_collector(t_gameconfig *src)
 		free_element(src->f);
 	if (src->c)
 		free_element(src->c);
+	src->nb_element = 0;
 	free_map(src->map);
 }

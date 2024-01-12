@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/06 11:13:05 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/12 15:19:01 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ typedef struct s_img
 
 typedef struct s_element
 {
-	int		exist
-	char	*str;
-	char	*id;
-	char	*info_sp;
+	char	id;
+	char	*info; // a liberer
 	t_img	*img;
 }			t_element;
 
@@ -65,6 +63,7 @@ typedef struct s_gameconfig
 	t_element	*ea;
 	t_element	*f;
 	t_element	*c;
+	int			nb_element;
 	t_map		*map;
 }				t_gameconfig;
 
