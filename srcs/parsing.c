@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:11 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/12 18:33:39 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/15 12:56:32 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int	err(char *msg1, char *msg2, char *msg3)
 {
+	int	rslt;
+	
 	while (*msg1)
-		write(2, msg1++, 1);
+		rslt = write(2, msg1++, 1);
 	while (*msg2)
-		write(2, msg2++, 1);
+		rslt = write(2, msg2++, 1);
 	while (*msg1)
-		write(2, msg3++, 1);
-	return(-1);
+		rslt = write(2, msg3++, 1);
+	rslt = -1;
+	return(rslt);
 }
 
 // check if is a valid .cub file
@@ -75,11 +78,13 @@ int	is_element(char *line)
 int	put_to_element(char *line, t_gameconfig *config)
 {
 	t_element	element;
+	char		*tmp;
 	
-	element.id = *line++;
-	while (*line == ' ')
-		line++;
-	element.info = ft_strdup(line);
+	tmp = line;
+	element.id = *tmp++;
+	while (*tmp == ' ')
+		tmp++;
+	element.info = ft_strdup(tmp);
 	if (!element.info)
 		return (err("Error!\n", line, "\nput_to_element: malloc failed\n"));
 	element.img = NULL;
@@ -103,9 +108,11 @@ int	put_to_element(char *line, t_gameconfig *config)
 
 int	is_start_map(char *line)
 {
+	if (*line == '\n')
+		return (0);
 	while (*line)
 	{
-		if (*line != '1' && *line != ' ')
+		if (*line != '1' && *line != ' ' && *line!= '\t' && *line != '\n')
 			return (0);
 		line++;
 	}
@@ -116,14 +123,14 @@ int	is_empty_line(char *line)
 {
 	while (*line)
 	{
-		if (*line != ' ' && *line != '\t' && *line != '\n');
+		if (*line != ' ' && *line != '\t' && *line != '\n')
 			return (0);
 		line++;
 	}
 	return (1);
 }
 
-int	err_map_condition(char *line, int i)
+int	err_map_condition(char *line, int i, int ply_pos)
 {
 	if (line[i] != '1' && line[i] != '0' && line[i] != ' '
 		&& line[i] != 'N' && line[i] != 'S' && line[i] == 'W' && line[i] == 'E')
@@ -132,6 +139,7 @@ int	err_map_condition(char *line, int i)
 		return (err("Error!\nSpace in map: ", line, "\n"));
 	if (ply_pos > 1)
 		return (err("Error!\nToo much player position: ", line, "\n"));
+	return (0);
 }
 
 int	check_map_content(int fd)
@@ -140,28 +148,71 @@ int	check_map_content(int fd)
 	char	*line;
 	int		ply_pos;
 
-	i = 0;
 	ply_pos = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		i = 0;
 		while (line[i] && (line[i] == ' ' || ((line[i] > 8 && line[i] < 14))))
 			i++;
 		while (line[i])
 		{
 			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
 				ply_pos++;
-			if (err_map_condition(line, i) == -1)
+			if (err_map_condition(line, i, ply_pos) == -1)
 				return (-1);
 			i++;
 		}
+		free(line);
 	}
 	if (ply_pos == 0)
 		return (err("Error!\n", "Player position missing\n", NULL));
 	return (0);
 }
+
+// int	put_map_in_tab(t_gameconfig *config)
+// {
+// 	t_map	*tmp;
+// 	int		size;
+// 	char	**map;
+// 	int		i;
+	
+// 	tmp = config->map;
+// 	while (*tmp)
+// 	{
+// 		size++;
+// 		tmp = tmp->next;
+// 	}
+// 	map = (char **)malloc(sizeof(char *) * size);
+// 	if (!map)
+// 		return(err("Error!\nParsing: Put_map_in_tab:", "malloc failed", "\n"));
+// 	tmp = config->map;
+// 	i = 0
+// 	while (*tmp)
+// 	{
+// 		config->tab[i++] = tmp->line;
+// 		tmp = tmp->next;
+// 	}
+// 	return (0);
+// }
+
+// int	make_map(int fd, t_gameconfig *config)
+// {
+// 	t_map	*tmp;
+
+// 	tmp = config->map;
+// 	while (1)
+// 	{
+// 		tmp->line = get_next_line(fd);
+// 		if (!tmp->line)
+// 			break ;
+// 		tmp = tmp->next;		
+// 	}
+// 	tmp->next = NULL;
+// 	put_map_in_tab(config);
+// }
 
 // get configuration elements and if there is a map, check it content 
 void	first_read_file(int fd, t_gameconfig *config)
@@ -177,77 +228,112 @@ void	first_read_file(int fd, t_gameconfig *config)
 			break ;
 		if (is_element(line))
 			rslt = put_to_element(line, config);
-		else if (is_start_map(line) && (config.nb_element != 6
-			|| check_map_content(fd) == -1))
-			rslt = -1;
-		else if (is_empty_line(line) == 0)
-			rslt = err("Error!\nBad element: ", line, NULL);	
-		free(line);
+		else if (is_empty_line(line))
+			rslt = 0;
+		else if (is_start_map(line))
+		{
+			if (config->nb_element != 6 || make_map(fd, config) == -1)
+		//		|| check_map_content(fd) == -1)
+				rslt = -1;
+		}
+		else
+			rslt = err("Error!\nBad element: ", line, NULL);
 		if (rslt == -1)
 		{
+			free(line);
 			garbage_collector(config);
 			return ;
 		}
 	}
 }
 
-int	get_map_size(char *gamefile)
-{
-	int		size;
-	int		fd;
-	char	*line;
+// int	get_map_size(char *gamefile)
+// {
+// 	int		size;
+// 	int		fd;
+// 	char	*line;
 
-	size = 0;
-	fd = open(gamefile, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error: get_map_size\n");
-		ft_putstr_fd(gamefile, 2);
-		return (-1);
-	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (is_start_map(line))
-		{
-			while (1)
-			{
-				line = get_next_line(fd);
-				size++;
-				free(line);
-			}
-		}
-	}
-}
+// 	size = 0;
+// 	fd = open(gamefile, O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		perror("Error: get_map_size\n");
+// 		ft_putstr_fd(gamefile, 2);
+// 		return (-1);
+// 	}
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 			break ;
+// 		if (is_start_map(line))
+// 		{
+// 			while (line)
+// 			{
+// 				line = get_next_line(fd);
+// 				size++;
+// 				free(line);
+// 			}
+// 			break ;
+// 		}
+// 	}
+// 	return (size);
+// }
 
-int	get_map(char *gamefile, t_gameconfig *config)
-{
-	int		fd;
-	char	*line;
+// int	get_map(char *gamefile, t_gameconfig *config)
+// {
+// 	int		fd;
+// 	int		size;
+// 	char	*line;
+// 	char	**map;
 
-	fd = check_file_path(gamefile)
-	if (fd == -1)
-	{
-		garbage_collector(config);
-		return (-1);
-	}
-	while (1)
-	{
-		
-	}
-}
+// 	fd = check_file_path(gamefile)
+// 	if (fd == -1)
+// 	{
+// 		garbage_collector(config);
+// 		return (-1);
+// 	}
+// 	size = get_map_size(gamefile)
+// 	if (size == -1)
+// 	{
+// 		garbage_collector(config);
+// 		close (fd);
+// 		return (-1);
+// 	}
+// 	config->map->mapptr = (char **)malloc(sizeof(char *) * (size + 1));
+// 	if (!config->map->mapptr)
+// 	{
+// 		garbage_collector(config);
+// 		close (fd);
+// 		return (-1);
+// 	}
+// 	map = config->map->mapptr;
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 			break ;
+// 		if (is_start_map(line))
+// 		{
+// 			*map = line;
+// 			while (*map)
+// 			{
+// 				map++;
+// 				*map = get_next_line(fd);
+// 			}
+// 		}
+// 	}
+// }
 
 int	parsing(char *gamefile, t_gameconfig *config)
 {
 	int				fd;
 	
-	fd = check_file_path(gamefile)
+	fd = check_file_path(gamefile);
 	if (fd == -1)
 		return (-1);
 	first_read_file(fd, config);
-	if (config->nb_element != 6 || get_map(gamefile, config) == -1)
+	if (config->nb_element != 6)
 	{
 		close(fd);
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/12 18:19:18 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:30:10 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ int	main(int argc, char **argv)
 	init_config(&config);
 	if (argc == 2 && argv[1] && argv[1][0] != '\0')
 	{
-		parsing(argv[1], &config);
+		if (parsing(argv[1], &config) == 0)
+			printf("parsing ok\n");
 	}
 	else
-	{
 		ft_putstr_fd("Error!\nParameter not valid\n", 2);
-		exit(1);
-	}
 	return (0);
 }

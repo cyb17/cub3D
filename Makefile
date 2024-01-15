@@ -6,7 +6,7 @@
 #    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/01/05 11:33:59 by yachen           ###   ########.fr        #
+#    Updated: 2024/01/15 10:13:28 by yachen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFTDIR = ./libft
 
 RM = rm -rf
 
-FILE = main
+FILE = main parsing garbage_collector
 
 SRC = $(addsuffix .c, $(addprefix srcs/, $(FILE))) \
 	  
