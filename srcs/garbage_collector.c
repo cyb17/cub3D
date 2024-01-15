@@ -6,22 +6,22 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 12:50:14 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/15 18:03:40 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static void	free_element(t_element *element, t_map *map)
-{
-	if (element->info)
-		free(element->info);
-	if (element->img)
-	{
-		mlx_destroy_image(map->mlx, element->img);
-		free(element->img);
-	}
-}
+// static void	free_element(t_element *element, t_gameconfig *config)
+// {
+// 	if (element->info)
+// 		free(element->info);
+// 	if (element->img)
+// 	{
+// 		mlx_destroy_image(config->mlx, element->img);
+// 		free(element->img);
+// 	}
+// }
 
 // static void	free_map(t_map *map)
 // {
@@ -40,36 +40,34 @@ static void	free_element(t_element *element, t_map *map)
 // 	}
 // }
 
-static void	free_map(t_map **map)
+static void	clear_list_ptr(t_list **list)
 {
-	t_map	*tmp;
-
-	tmp = *map->next;
-	while (*map)
+	t_list	*tmp;
+	
+	while (*list)
 	{
-		if (*map->line)
-			free(*map->line);
-		free(*map);
-		*map = tmp;
-		tmp = *map->next;
+		tmp = *list;
+		*list = (*list)->next;
+		free(tmp);
 	}
 }
 
-void	garbage_collector(t_gameconfig *src)
+void	garbage_collector(t_gameconfig *config)
 {
-	if (src->no)
-		free_element(src->no, src->map);
-	if (src->so)
-		free_element(src->so, src->map);
-	if (src->we)
-		free_element(src->we, src->map);
-	if (src->ea)
-		free_element(src->ea, src->map);
-	if (src->f)
-		free_element(src->f, src->map);
-	if (src->c)
-		free_element(src->c, src->map);
-	src->nb_element = 0;
-	free_map(&src->map);
-	
+	if (config->file)
+		clear_list_ptr(&config->file);
+	// if (config->no)
+	// 	free_element(config->no, config->mlx);
+	// if (config->so)
+	// 	free_element(config->so, config->mlx);
+	// if (config->we)
+	// 	free_element(config->we, config->mlx);
+	// if (config->ea)
+	// 	free_element(config->ea, config->mlx);
+	// if (config->f)
+	// 	free_element(config->f, config->mlx);
+	// if (config->c)
+	// 	free_element(config->c, config->mlx);
+	// config->nb_element = 0;
+	// free_tab(config->map);
 }

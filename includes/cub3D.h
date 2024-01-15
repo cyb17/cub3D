@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 12:39:09 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:18:48 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,19 @@ typedef struct s_element
 
 // typedef struct s_map
 // {
-// 	char	**mapptr;
-// 	void	*mlx;
-// 	void	*mlx_w;
-// 	float	x_ply;
-// 	float	y_ply;
-// 	//direction du regard
-// 	float	x_wall;
-// 	float	y_wall;
-// }			t_map;
-
-typedef struct s_map
-{
-	char			*line;
-	struct s_map	*next;
-}
+	// char	**mapptr;
+	// void	*mlx;
+	// void	*mlx_w;
+	// float	x_ply;
+	// float	y_ply;
+	//direction du regard
+	// float	x_wall;
+	// float	y_wall;
+// }			t_map;					
 
 typedef struct s_gameconfig
 {
+	t_list		*file;
 	t_element	*no;
 	t_element	*so;
 	t_element	*we;
@@ -65,8 +60,10 @@ typedef struct s_gameconfig
 	t_element	*f;
 	t_element	*c;
 	int			nb_element;
-	t_map		*map;
-	char		**tab;
+	char		**map;
+	void		*mlx;
+	void		*mlx_w;
+
 }				t_gameconfig;
 
 

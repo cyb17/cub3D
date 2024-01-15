@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 10:30:10 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/15 17:30:54 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_config(t_gameconfig *config)
 {
+	config->file = NULL;
 	config->no = NULL;
 	config->so = NULL;
 	config->we = NULL;

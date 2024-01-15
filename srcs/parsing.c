@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 11:18:11 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 12:56:32 by yachen           ###   ########.fr       */
+/*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
+/*   Updated: 2024/01/15 18:18:32 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ int	check_file_path(char *gamefile)
 		return (-1);
 	}
 	return (fd);
+}
+
+void	read_file_to_list(int fd, t_gameconfig *config)
+{
+	t_list	*tmp;
+
+	while (1)
+	{
+		tmp = ft_lstnew(get_next_line(fd));
+		if (!tmp)
+			break ;
+		ft_lstadd_back(&config->file, tmp);
+	}
+	close(fd);
 }
 
 // check element id and nb of followed info
@@ -130,214 +144,57 @@ int	is_empty_line(char *line)
 	return (1);
 }
 
-int	err_map_condition(char *line, int i, int ply_pos)
+int	get_info_from_list(t_gameconfig *config)
 {
-	if (line[i] != '1' && line[i] != '0' && line[i] != ' '
-		&& line[i] != 'N' && line[i] != 'S' && line[i] == 'W' && line[i] == 'E')
-		return (err("Error!\nBad map content: ", line, "\n"));	
-	if (line[i] == ' ' && (line[i - 1] != '1' || line[i + 1] != '1'))
-		return (err("Error!\nSpace in map: ", line, "\n"));
-	if (ply_pos > 1)
-		return (err("Error!\nToo much player position: ", line, "\n"));
-	return (0);
-}
-
-int	check_map_content(int fd)
-{
-	int		i;
-	char	*line;
-	int		ply_pos;
-
-	ply_pos = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		i = 0;
-		while (line[i] && (line[i] == ' ' || ((line[i] > 8 && line[i] < 14))))
-			i++;
-		while (line[i])
-		{
-			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
-				ply_pos++;
-			if (err_map_condition(line, i, ply_pos) == -1)
-				return (-1);
-			i++;
-		}
-		free(line);
-	}
-	if (ply_pos == 0)
-		return (err("Error!\n", "Player position missing\n", NULL));
-	return (0);
-}
-
-// int	put_map_in_tab(t_gameconfig *config)
-// {
-// 	t_map	*tmp;
-// 	int		size;
-// 	char	**map;
-// 	int		i;
+	int		rslt;
+	t_list	*tmp;
 	
-// 	tmp = config->map;
-// 	while (*tmp)
-// 	{
-// 		size++;
-// 		tmp = tmp->next;
-// 	}
-// 	map = (char **)malloc(sizeof(char *) * size);
-// 	if (!map)
-// 		return(err("Error!\nParsing: Put_map_in_tab:", "malloc failed", "\n"));
-// 	tmp = config->map;
-// 	i = 0
-// 	while (*tmp)
-// 	{
-// 		config->tab[i++] = tmp->line;
-// 		tmp = tmp->next;
-// 	}
-// 	return (0);
-// }
-
-// int	make_map(int fd, t_gameconfig *config)
-// {
-// 	t_map	*tmp;
-
-// 	tmp = config->map;
-// 	while (1)
-// 	{
-// 		tmp->line = get_next_line(fd);
-// 		if (!tmp->line)
-// 			break ;
-// 		tmp = tmp->next;		
-// 	}
-// 	tmp->next = NULL;
-// 	put_map_in_tab(config);
-// }
-
-// get configuration elements and if there is a map, check it content 
-void	first_read_file(int fd, t_gameconfig *config)
-{
-	int				rslt;
-	char			*line;
-
 	rslt = 0;
-	while (1)
+	tmp = config->file;
+	while (tmp)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (is_element(line))
-			rslt = put_to_element(line, config);
-		else if (is_empty_line(line))
+		if (is_element(tmp->content))
+			rslt = put_to_element(tmp->content, config);
+		else if (is_empty_line(tmp->content))
 			rslt = 0;
-		else if (is_start_map(line))
-		{
-			if (config->nb_element != 6 || make_map(fd, config) == -1)
-		//		|| check_map_content(fd) == -1)
-				rslt = -1;
-		}
+		else if (is_start_map(tmp->content) && config->nb_element == 6)
+			return (0);//rslt = make_map();
 		else
-			rslt = err("Error!\nBad element: ", line, NULL);
+			rslt = -1;
 		if (rslt == -1)
 		{
-			free(line);
-			garbage_collector(config);
-			return ;
+			ft_putstr_fd("Error!\nThis line is not correct: ", 2);
+			return (err((char *)tmp->content, "\nPlease check again\n", ""));
 		}
+		tmp = tmp->next;
 	}
+	return (0);
 }
-
-// int	get_map_size(char *gamefile)
-// {
-// 	int		size;
-// 	int		fd;
-// 	char	*line;
-
-// 	size = 0;
-// 	fd = open(gamefile, O_RDONLY);
-// 	if (fd == -1)
-// 	{
-// 		perror("Error: get_map_size\n");
-// 		ft_putstr_fd(gamefile, 2);
-// 		return (-1);
-// 	}
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break ;
-// 		if (is_start_map(line))
-// 		{
-// 			while (line)
-// 			{
-// 				line = get_next_line(fd);
-// 				size++;
-// 				free(line);
-// 			}
-// 			break ;
-// 		}
-// 	}
-// 	return (size);
-// }
-
-// int	get_map(char *gamefile, t_gameconfig *config)
-// {
-// 	int		fd;
-// 	int		size;
-// 	char	*line;
-// 	char	**map;
-
-// 	fd = check_file_path(gamefile)
-// 	if (fd == -1)
-// 	{
-// 		garbage_collector(config);
-// 		return (-1);
-// 	}
-// 	size = get_map_size(gamefile)
-// 	if (size == -1)
-// 	{
-// 		garbage_collector(config);
-// 		close (fd);
-// 		return (-1);
-// 	}
-// 	config->map->mapptr = (char **)malloc(sizeof(char *) * (size + 1));
-// 	if (!config->map->mapptr)
-// 	{
-// 		garbage_collector(config);
-// 		close (fd);
-// 		return (-1);
-// 	}
-// 	map = config->map->mapptr;
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break ;
-// 		if (is_start_map(line))
-// 		{
-// 			*map = line;
-// 			while (*map)
-// 			{
-// 				map++;
-// 				*map = get_next_line(fd);
-// 			}
-// 		}
-// 	}
-// }
 
 int	parsing(char *gamefile, t_gameconfig *config)
 {
-	int				fd;
+	int	fd;
 	
 	fd = check_file_path(gamefile);
 	if (fd == -1)
 		return (-1);
-	first_read_file(fd, config);
-	if (config->nb_element != 6)
+	read_file_to_list(fd, config);
+	if (get_info_from_list(config) == -1)
 	{
-		close(fd);
+		garbage_collector(config);
 		return (-1);
 	}
-	close(fd);
+	// while (config->file)
+	// {
+	// 	printf("%s", (char *)config->file->content);
+	// 	config->file = config->file->next;
+	// }
+	// first_read_file(fd, config, gamefile);
+	// if (config->nb_element != 6)
+	// {
+	// 	close(fd);
+	// 	return (-1);
+	// }
+	// close(fd);
 	return (0);
 }
