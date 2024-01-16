@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/16 14:12:32 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/16 17:30:18 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	read_file_to_list(int fd, t_gameconfig *config)
 	close(fd);
 }
 
+
+// cette fonction est peut etre a revoir a cause des white spaces
 int	with_correct_info(char *line)
 {
 	char	**tab;
@@ -84,7 +86,7 @@ int	with_correct_info(char *line)
 			return (0);
 		}
 		i = 0;
-		while ((*tmp)[i] == ' ' || (*tmp)[i] == '\t')
+		while ((*tmp)[i] && (*tmp)[i] == ' ' || (*tmp)[i] == '\t')
 			i++;
 		while((*tmp)[i] && (*tmp)[i] != ',' && (*tmp)[i] != '\n')
 		{
@@ -110,7 +112,7 @@ int	is_element(char *line)
 		|| line[0] == 'C' || line[0] == 'F') && (line[1] == ' ' || line[1] == '\t'))
 	{
 		tmp++;
-		while (*tmp == ' ' || *tmp == '\t')
+		while (*tmp && *tmp == ' ' || *tmp == '\t')
 			tmp++;	
 		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 		{
@@ -182,32 +184,74 @@ int	is_empty_line(char *line)
 	return (1);
 }
 
+int	check_wall(char **map, int size);
+{
+	// idee : "si un 0 ou un N/S/E/W ou un 2 est en contacte 
+	// avec un espace ou le 'bord' de la map, alors la map n'est pas fermée, et il y a erreur."
+}
+
+int	check_map(char **map, int size)
+{
+	int	row;
+	int	col;
+	int	ply_pos;
+
+	row = 0;
+	ply_pos = 0;
+	while (map[row])
+	{
+		col = 0;
+		while (map[row][col])
+		{
+			if (map[row][col] != ' ' && map[row][col] != '\t' && map[row][col] != '1'
+				&& map[row][col] != '0' && map[row][col] != 'N' && map[row][col] != 'S'
+				&& map[row][col] != 'W' && map[row][col] != 'E')
+				return (err("Error!\nWrong map content: ", map[row], "\n"));
+			if (map[row][col] == 'N' || map[row][col] == 'S' || map[row][col] == 'W'
+				|| map[row][col] == 'E')
+				ply_pos++;
+			if (ply_pos != 1)
+				return (err("Error\nThere is too many player in map", "",""));
+			col++;
+		}
+		row++;
+	}
+	return (check_wall(map, size));
+}
+
 int	make_map(t_list *start, t_gameconfig *config)
 {
 	int		i;
+	int		size;
 	t_list	*tmp;
 
-	i = 0;
+	size = 0;
 	tmp = start;
 	while (tmp)
 	{
 		tmp = tmp->next;
-		i++;
+		size++;
 	}
-	config->map = (char **)malloc(sizeof(char *) * (i + 1));
+	config->map = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!config)
 		return (err("Error!\n","Make_map: ", "Malloc failed\n"));
 	i = 0;
 	while (start)
 	{
-		config->map[i++] = start->content;
-		start = start->next;
+		if (!is_empty_line(start->content))
+			config->map[i++] = start->content;
+		else
+		{
+			while (start && is_empty_line(start->content))
+				start = start->next;
+			if (start != NULL)
+				return (err("Error\nToo much information after map description", "", ""));
+		}
+		if (start)
+			start = start->next;
 	}
 	config->map[i] = NULL;
-	// i = 0;
-	// while (config->map[i])
-	// 	printf("map%s\n", config->map[i++]);
-	return (0);
+	return (check_map(config->map, size))
 }
 
 int	get_info_from_list(t_gameconfig *config)
