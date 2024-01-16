@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 18:03:40 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/16 13:35:28 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 // 	}
 // }
 
-static void	clear_list_ptr(t_list **list)
+void	clear_list_ptr(t_list **list)
 {
 	t_list	*tmp;
 	

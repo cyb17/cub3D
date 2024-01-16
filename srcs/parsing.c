@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 18:18:32 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:12:32 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,39 +66,77 @@ void	read_file_to_list(int fd, t_gameconfig *config)
 	close(fd);
 }
 
-// check element id and nb of followed info
+int	with_correct_info(char *line)
+{
+	char	**tab;
+	char	**tmp;
+	int		i;
+
+	tab = ft_split(line, ',');
+	if (!tab)
+		return (err("Error!\nWith_correct_info: Malloc failed\n", "", ""));
+	tmp = tab;
+	while (*tmp)
+	{
+		if (ft_strlen(*tmp) > 4)
+		{
+			free_tab(tab);
+			return (0);
+		}
+		i = 0;
+		while ((*tmp)[i] == ' ' || (*tmp)[i] == '\t')
+			i++;
+		while((*tmp)[i] && (*tmp)[i] != ',' && (*tmp)[i] != '\n')
+		{
+			if (!ft_isdigit((*tmp)[i]))
+			{
+				free_tab(tab);
+				return (0);
+			}
+			i++;
+		}
+		tmp++;
+	}
+	free_tab(tab);
+	return (1);
+}
+
 int	is_element(char *line)
 {
 	char	*tmp;
-	int		nb_info;
 
 	tmp = line;
-	nb_info = 0;
-	while (*tmp)
+	if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E'
+		|| line[0] == 'C' || line[0] == 'F') && (line[1] == ' ' || line[1] == '\t'))
 	{
-		if (*tmp == ' ' && *(tmp + 1) != ' ' && *(tmp + 1))
-			nb_info++;
-		tmp++;	
+		tmp++;
+		while (*tmp == ' ' || *tmp == '\t')
+			tmp++;	
+		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
+		{
+			while (*tmp)
+			{
+				if (*tmp == ' ' || *tmp == '\t')
+					return (0);
+				tmp++;
+			}
+			return (1);
+		}
+		else if ((line[0] == 'C' || line[0] == 'F') && with_correct_info(tmp))
+			return (1);
 	}
-	if (((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
-		&& line[1] == ' ' && nb_info == 1)
-		|| ((line[0] == 'C' || line[0] == 'F') && line[1] == ' ' && nb_info >= 1
-			&& nb_info < 4))
-		return (1);
 	return (0);
 }
 
 // put to element if element not already exist
-int	put_to_element(char *line, t_gameconfig *config)
+int	put_to_element(char *line, char *line2, t_gameconfig *config)
 {
 	t_element	element;
-	char		*tmp;
 	
-	tmp = line;
-	element.id = *tmp++;
-	while (*tmp == ' ')
-		tmp++;
-	element.info = ft_strdup(tmp);
+	element.id = *line2++;
+	while (*line2 == ' ')
+		line2++;
+	element.info = ft_strdup(line2);
 	if (!element.info)
 		return (err("Error!\n", line, "\nput_to_element: malloc failed\n"));
 	element.img = NULL;
@@ -144,6 +182,34 @@ int	is_empty_line(char *line)
 	return (1);
 }
 
+int	make_map(t_list *start, t_gameconfig *config)
+{
+	int		i;
+	t_list	*tmp;
+
+	i = 0;
+	tmp = start;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	config->map = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!config)
+		return (err("Error!\n","Make_map: ", "Malloc failed\n"));
+	i = 0;
+	while (start)
+	{
+		config->map[i++] = start->content;
+		start = start->next;
+	}
+	config->map[i] = NULL;
+	// i = 0;
+	// while (config->map[i])
+	// 	printf("map%s\n", config->map[i++]);
+	return (0);
+}
+
 int	get_info_from_list(t_gameconfig *config)
 {
 	int		rslt;
@@ -154,11 +220,15 @@ int	get_info_from_list(t_gameconfig *config)
 	while (tmp)
 	{
 		if (is_element(tmp->content))
-			rslt = put_to_element(tmp->content, config);
+			rslt = put_to_element(tmp->content, tmp->content, config);
 		else if (is_empty_line(tmp->content))
 			rslt = 0;
 		else if (is_start_map(tmp->content) && config->nb_element == 6)
-			return (0);//rslt = make_map();
+		{
+			if (make_map(tmp, config) == 0)
+				break ;
+			rslt = -1;
+		}
 		else
 			rslt = -1;
 		if (rslt == -1)
@@ -184,17 +254,5 @@ int	parsing(char *gamefile, t_gameconfig *config)
 		garbage_collector(config);
 		return (-1);
 	}
-	// while (config->file)
-	// {
-	// 	printf("%s", (char *)config->file->content);
-	// 	config->file = config->file->next;
-	// }
-	// first_read_file(fd, config, gamefile);
-	// if (config->nb_element != 6)
-	// {
-	// 	close(fd);
-	// 	return (-1);
-	// }
-	// close(fd);
 	return (0);
 }

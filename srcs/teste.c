@@ -6,14 +6,14 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:36:14 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 16:53:36 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:41:40 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include "../libft/get_next_line.h"
+#include "../libft/libft.h"
 // int	err(char *str)
 // {
 // 	while (*str)
@@ -44,16 +44,9 @@
 
 int	main(void)
 {
-	int		fd;
-	char	*line;
+	char **tmp;
 
-	fd = open("t.txt", O_RDONLY);
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		printf("%s", line);
-		free(line);
-	}
+	tmp = ft_split("230367378", ',');
+	while (*tmp)
+		printf("%s\n", *tmp++);
 }

@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/15 17:18:48 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/16 13:35:45 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_gameconfig
 
 
 int		parsing(char *gamefile, t_gameconfig *config);
+void	clear_list_ptr(t_list **list);
 void	garbage_collector(t_gameconfig *src);
 
 #endif
