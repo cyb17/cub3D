@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/19 17:53:06 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/20 14:41:31 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	err(char *msg1, char *msg2, char *msg3)
 		rslt = write(2, msg1++, 1);
 	while (*msg2)
 		rslt = write(2, msg2++, 1);
-	while (*msg1)
+	while (*msg3)
 		rslt = write(2, msg3++, 1);
 	rslt = -1;
 	return(rslt);
@@ -46,7 +46,7 @@ int	check_file_path(char *gamefile)
 	}
 	else
 	{
-		err("Error!\nWrong map extension: ", gamefile, "\n");
+		err("Error!\nBad map extension: ", gamefile, "\n");
 		return (-1);
 	}
 	return (fd);
@@ -73,15 +73,17 @@ int	check_info(char *tmp)
 	i = 0;
 	while (tmp[i] && (tmp[i] == ' ' || tmp[i] == '\t'))
 		i++;
+	if (ft_strlen(tmp + i) > 4)
+		return (err("Error!\n", "Bad color code\n", ""));
 	while(tmp[i] && tmp[i] != ',' && tmp[i] != '\n')
 	{
-		if (!ft_isdigit(tmp[i]))
-			return (err("Error!\nColor code has to be digit: ", tmp, "\n"));
+		if (!ft_isdigit(tmp[i])) // il y a une bug quand ya des espaces a la fin du str
+			return (err("Error!\nColor code has to be digit\n", "", ""));
 		i++;
 	}
-	(*tmp)[i] = '\0';
+	tmp[i] = '\0';
 	if (ft_atoi(tmp) < 0  || ft_atoi(tmp) > 255)
-		return (err("Error!\nColor code has to be between 0-255: ", tmp, "\n"));
+		return (err("Error!\nColor code has to be between 0-255\n", "", ""));
 	return (0);
 }
 
@@ -89,7 +91,6 @@ int	with_correct_info(char *line)
 {
 	char	**tab;
 	char	**tmp;
-	int		i;
 
 	tab = ft_split(line, ',');
 	if (!tab)
@@ -97,7 +98,7 @@ int	with_correct_info(char *line)
 	tmp = tab;
 	while (*tmp)
 	{
-		if (ft_strlen(*tmp) > 4 || check_info(*tmp) == -1)
+		if (check_info(*tmp) == -1)
 		{
 			free_tab(tab);
 			return (0);
@@ -108,10 +109,18 @@ int	with_correct_info(char *line)
 	return (1);
 }
 
+char	*delete_white_space(char *line)
+{
+	while (*line && (*line == ' ' || *line == '\t'))
+		line++;
+	return (line);
+}
+
 int	is_element(char *line)
 {
 	char	*tmp;
 
+	line = delete_white_space(line);
 	tmp = line;
 	if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E'
 		|| line[0] == 'C' || line[0] == 'F') && (line[1] == ' ' || line[1] == '\t'))
@@ -121,15 +130,14 @@ int	is_element(char *line)
 			tmp++;	
 		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 		{
-			while (*tmp)
-			{
-				if (*tmp == ' ' || *tmp == '\t')
-					return (0);
+			while (*tmp && *tmp != ' ' && *tmp != '\t')
 				tmp++;
-			}
+			tmp = delete_white_space(tmp);
+			if (*tmp && *tmp != '\n')
+				return (0);
 			return (1);
 		}
-		else if ((line[0] == 'C' || line[0] == 'F') && with_correct_info(tmp, ft_strlen(tmp)))
+		else if ((line[0] == 'C' || line[0] == 'F') && with_correct_info(tmp))
 			return (1);
 	}
 	return (0);
@@ -138,12 +146,14 @@ int	is_element(char *line)
 // put to element if element not already exist
 int	put_to_element(char *line, char *line2, t_gameconfig *config)
 {
-	t_element	element;
+	static t_element	element;
 	
+	line = delete_white_space(line);
+	line2 = delete_white_space(line);
 	element.id = *line2++;
 	while (*line2 == ' ')
 		line2++;
-	element.info = ft_strdup(line2);
+	element.info = line2;
 	if (!element.info)
 		return (err("Error!\n", line, "\nput_to_element: malloc failed\n"));
 	element.img = NULL;
@@ -193,6 +203,8 @@ int	have_right_wall(char **map, int i, int j)
 {
 	while (map[i][j] && map[i][j] != '\n')
 	{
+		if (map[i][j] == ' ')
+			return (0);
 		if (map[i][j] == '1')
 			return (1);
 		j++;
@@ -204,6 +216,8 @@ int	have_left_wall(char **map, int i, int j)
 {
 	while (j >= 0)
 	{
+		if (map[i][j] == ' ')
+			return (0);
 		if (map[i][j] == '1')
 			return (1);
 		j--;
@@ -215,6 +229,8 @@ int	have_top_wall(char **map, int i, int j)
 {
 	while (i >= 0)
 	{
+		if (map[i][j] == ' ')
+			return (0);
 		if (map[i][j] == '1')
 			return (1);
 		i--;
@@ -226,6 +242,8 @@ int	have_bottom_wall(char **map, int i, int j, int size)
 {
 	while (i < size)
 	{
+		if (map[i][j] == ' ')
+			return (0);
 		if (map[i][j] == '1')
 			return (1);
 		i++;
@@ -253,7 +271,8 @@ int	check_wall(char **map, int size)
 		while (map[i][j])
 		{
 			if ((map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'W' || map[i][j] == 'E') && (!is_surrounded_by_walls(map, size, i, j)))
+				|| map[i][j] == 'W' || map[i][j] == 'E')
+				&& (!is_surrounded_by_walls(map, size, i, j)))
 				return (err("Error!\nMap not closed in the line\n", map[i], "\n"));
 			if (map[i][j] == ' ' && is_surrounded_by_walls(map, size, i, j))
 				return (err("Error!\nSpace in map in the line\n", map[i], "\n"));
@@ -389,5 +408,12 @@ int	parsing(char *gamefile, t_gameconfig *config)
 		garbage_collector(config);
 		return (-1);
 	}
+	// t_list	*tmp = config->file;
+	// while (tmp)
+	// {
+	// 	printf("%s\n", (char *)tmp->content);
+	// 	tmp = tmp->next;
+	// }
+	// printf("%s\n", (char *)config->no->info);
 	return (0);
 }

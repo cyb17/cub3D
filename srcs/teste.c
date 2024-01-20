@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:36:14 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/16 12:41:40 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/20 11:21:52 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,21 @@
 // 	return (0);
 // }
 
+int	err(char *msg1, char *msg2, char *msg3)
+{
+	int	rslt;
+	
+	while (*msg1)
+		rslt = write(2, msg1++, 1);
+	while (*msg2)
+		rslt = write(2, msg2++, 1);
+	while (*msg1)
+		rslt = write(2, msg3++, 1);
+	rslt = -1;
+	return(rslt);
+}
+
 int	main(void)
 {
-	char **tmp;
-
-	tmp = ft_split("230367378", ',');
-	while (*tmp)
-		printf("%s\n", *tmp++);
+	err("hfj", "fdgs", "gfh\n");
 }

@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/16 13:35:28 by yachen           ###   ########.fr       */
+/*   Updated: 2024/01/20 11:37:39 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 // static void	free_element(t_element *element, t_gameconfig *config)
 // {
-// 	if (element->info)
-// 		free(element->info);
+// 	// if (element->info)
+// 	// 	free(element->info);
 // 	if (element->img)
 // 	{
 // 		mlx_destroy_image(config->mlx, element->img);
 // 		free(element->img);
 // 	}
+// 	free(element);
 // }
 
 // static void	free_map(t_map *map)
@@ -48,6 +49,8 @@ void	clear_list_ptr(t_list **list)
 	{
 		tmp = *list;
 		*list = (*list)->next;
+		if (tmp->content)
+			free(tmp->content);
 		free(tmp);
 	}
 }
@@ -69,5 +72,5 @@ void	garbage_collector(t_gameconfig *config)
 	// if (config->c)
 	// 	free_element(config->c, config->mlx);
 	// config->nb_element = 0;
-	// free_tab(config->map);
+	free(config->map);
 }
