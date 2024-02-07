@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/01/20 14:41:31 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/07 12:52:58 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	check_file_path(char *gamefile)
 		fd = open(gamefile, O_RDONLY);
 		if (fd == -1)
 		{
-			perror("Error:\n");
-			ft_putstr_fd(gamefile, 2);
+			perror("Error!\n");
+			err(gamefile, "\n", "");
 			return (-1);
 		}
 	}
@@ -69,41 +69,45 @@ void	read_file_to_list(int fd, t_gameconfig *config)
 int	check_info(char *tmp)
 {
 	int	i;
-	
+	int	start_digit;
+	int	end_digit;
+
 	i = 0;
 	while (tmp[i] && (tmp[i] == ' ' || tmp[i] == '\t'))
 		i++;
-	if (ft_strlen(tmp + i) > 4)
-		return (err("Error!\n", "Bad color code\n", ""));
-	while(tmp[i] && tmp[i] != ',' && tmp[i] != '\n')
+	start_digit = i;
+	while (tmp[i] && ft_isdigit(tmp[i]))
+		i++;
+	end_digit = i;
+	while (tmp[i])
 	{
-		if (!ft_isdigit(tmp[i])) // il y a une bug quand ya des espaces a la fin du str
-			return (err("Error!\nColor code has to be digit\n", "", ""));
+		if (tmp[i] != ' ' && tmp[i] != '\t' && tmp[i] != ',' && tmp[i] != '\n')
+			return (err("Error!\n", "Bad information", "\n"));
 		i++;
 	}
-	tmp[i] = '\0';
-	if (ft_atoi(tmp) < 0  || ft_atoi(tmp) > 255)
+	tmp[end_digit] = '\0';
+	if (ft_atoi(tmp + start_digit) < 0  || ft_atoi(tmp + start_digit) > 255)
 		return (err("Error!\nColor code has to be between 0-255\n", "", ""));
 	return (0);
-}
+	}
 
 int	with_correct_info(char *line)
 {
 	char	**tab;
-	char	**tmp;
+	int		i;
 
 	tab = ft_split(line, ',');
 	if (!tab)
 		return (err("Error!\nWith_correct_info: Malloc failed\n", "", ""));
-	tmp = tab;
-	while (*tmp)
+	i = 0;
+	while (tab[i])
 	{
-		if (check_info(*tmp) == -1)
+		if (i > 2 || check_info(tab[i]) == -1)
 		{
 			free_tab(tab);
 			return (0);
 		}
-		tmp++;
+		i++;
 	}
 	free_tab(tab);
 	return (1);
@@ -229,7 +233,7 @@ int	have_top_wall(char **map, int i, int j)
 {
 	while (i >= 0)
 	{
-		if (map[i][j] == ' ')
+		if (map[i][j] == ' ' || map[i][j] == '\n')
 			return (0);
 		if (map[i][j] == '1')
 			return (1);
@@ -242,7 +246,7 @@ int	have_bottom_wall(char **map, int i, int j, int size)
 {
 	while (i < size)
 	{
-		if (map[i][j] == ' ')
+		if (map[i][j] == ' ' || map[i][j] == '\n')
 			return (0);
 		if (map[i][j] == '1')
 			return (1);
@@ -273,9 +277,9 @@ int	check_wall(char **map, int size)
 			if ((map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'W' || map[i][j] == 'E')
 				&& (!is_surrounded_by_walls(map, size, i, j)))
-				return (err("Error!\nMap not closed in the line\n", map[i], "\n"));
-			if (map[i][j] == ' ' && is_surrounded_by_walls(map, size, i, j))
-				return (err("Error!\nSpace in map in the line\n", map[i], "\n"));
+				return (err("Error!\nMap not closed or space in map\n", "", ""));
+			// if (map[i][j] == ' ' && is_surrounded_by_walls(map, size, i, j))
+			// 	return (err("Error!\nSpace in map\n", "", ""));
 			j++;
 		}
 		i++;
@@ -387,8 +391,8 @@ int	get_info_from_list(t_gameconfig *config)
 			rslt = -1;
 		if (rslt == -1)
 		{
-			ft_putstr_fd("Error!\nThis line is not correct: ", 2);
-			return (err((char *)tmp->content, "\nPlease check again\n", ""));
+			ft_putstr_fd("Error!\nNot correct element or bad map position: ", 2);
+			return (err((char *)tmp->content, "Please check again\n", ""));
 		}
 		tmp = tmp->next;
 	}
