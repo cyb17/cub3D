@@ -6,7 +6,7 @@
 #    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/01/15 17:51:20 by yachen           ###   ########.fr        #
+#    Updated: 2024/02/08 15:06:46 by yachen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,12 @@ LIBFTDIR = ./libft
 
 RM = rm -rf
 
-FILE = main parsing garbage_collector
+PARSING = check_gamefile is_element is_surrounded_by_wall check_map parsing_tools \
 
-SRC = $(addsuffix .c, $(addprefix srcs/, $(FILE))) \
+EXECUTION = main garbage_collector game_initialization
+
+SRC = $(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
+	  $(addsuffix .c, $(addprefix srcs/, $(EXECUTION))) \
 	  
 OBJ = $(SRC:.c=.o)
 
