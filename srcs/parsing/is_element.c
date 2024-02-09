@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:38:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/09 11:54:49 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/09 12:52:17 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 int	element_already_present(char *line, t_gameconfig *config)
 {
-	if (line[0] == 'N' && config->no.info == NULL)
-		config->no.info = line;
-	else if (line[0] == 'S' && config->so.info == NULL)
-		config->so.info = line;
-	else if (line[0] == 'W' && config->we.info == NULL)
-		config->we.info = line;
-	else if (line[0] == 'E' && config->ea.info == NULL)
-		config->ea.info = line;
-	else if (line[0] == 'F' && config->f.info == NULL)
-		config->f.info = line;
-	else if (line[0] == 'C' && config->c.info == NULL)
-		config->c.info = line;
+	if (line[0] == 'N' && config->no == NULL)
+		config->no = line;
+	else if (line[0] == 'S' && config->so == NULL)
+		config->so = line;
+	else if (line[0] == 'W' && config->we == NULL)
+		config->we = line;
+	else if (line[0] == 'E' && config->ea == NULL)
+		config->ea = line;
+	else if (line[0] == 'F' && config->f == NULL)
+		config->f = line;
+	else if (line[0] == 'C' && config->c == NULL)
+		config->c = line;
 	else
 	{
 		err("Error!\nElement already present: ", line, "\n");
