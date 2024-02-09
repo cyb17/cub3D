@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/08 14:41:56 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/09 12:03:08 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,45 @@
 
 # define SCREEN_W 640
 # define SCREEN_H 480
-// # define TILE_SIZE 30
 # define FOV 0.66
+
+// bpp = bit_by_pixels
+// ll = line_length
+// ed = endian => indique l'ordre d'interpretation des octets
+typedef struct	s_imge
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		ll;
+	int		ed;
+}				t_imge;
 
 typedef struct s_player
 {
-	float	pos_x;
-	float	pos_y;
-	float	dir_x;
-	float	dir_y;
-	float	camera_x;
-	float	camera_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	camera_x;
+	double	camera_y;
 }			t_player;
 
 typedef struct s_gameconfig
 {
 	t_list		*file;
-	int			no;
-	int			so;
-	int			we;
-	int			ea;
-	int			f;
-	int			c;
-	int			nb_element;
 	char		**map;
-	t_player	*player;
 	void		*mlx;
 	void		*mlx_w;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*f;
+	char		*c;
+	int			nb_element;
+	t_player	player;
+	t_imge		img;
 
 }				t_gameconfig;
 
@@ -92,8 +104,7 @@ char	*delete_white_space(char *line);
 /* EXECUTION */
 
 // game_initialization
-void	init_config(t_gameconfig *config);
-
+void	init_gameconfig(t_gameconfig *config);
 
 
 #endif

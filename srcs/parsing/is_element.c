@@ -6,11 +6,34 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:38:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/08 15:45:20 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/09 11:54:49 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+int	element_already_present(char *line, t_gameconfig *config)
+{
+	if (line[0] == 'N' && config->no.info == NULL)
+		config->no.info = line;
+	else if (line[0] == 'S' && config->so.info == NULL)
+		config->so.info = line;
+	else if (line[0] == 'W' && config->we.info == NULL)
+		config->we.info = line;
+	else if (line[0] == 'E' && config->ea.info == NULL)
+		config->ea.info = line;
+	else if (line[0] == 'F' && config->f.info == NULL)
+		config->f.info = line;
+	else if (line[0] == 'C' && config->c.info == NULL)
+		config->c.info = line;
+	else
+	{
+		err("Error!\nElement already present: ", line, "\n");
+		return (1);
+	}
+	config->nb_element++;
+	return (0);
+}
 
 static int	check_info(char *tmp)
 {
@@ -39,29 +62,6 @@ static int	check_info(char *tmp)
 	return (0);
 }
 	
-int	element_already_present(char *line, t_gameconfig *config)
-{
-	if (line[0] == 'N' && config->no == 0)
-		config->no = 1;
-	else if (line[0] == 'S' && config->so == 0)
-		config->so = 1;
-	else if (line[0] == 'W' && config->we == 0)
-		config->we = 1;
-	else if (line[0] == 'E' && config->ea == 0)
-		config->ea = 1;
-	else if (line[0] == 'F' && config->f == 0)
-		config->f = 1;
-	else if (line[0] == 'C' && config->c == 0)
-		config->c = 1;
-	else
-	{
-		err("Error!\nElement already present: ", line, "\n");
-		return (1);
-	}
-	config->nb_element++;
-	return (0);
-}
-
 int	with_correct_info(char *line)
 {
 	char	**tab;
@@ -112,35 +112,3 @@ int	is_element(char *line)
 	}
 	return (0);
 }
-
-// put to element if element not already exist
-// int	put_to_element(char *line, char *line2, t_gameconfig *config)
-// {
-// 	static t_element	element;
-	
-// 	line = delete_white_space(line);
-// 	line2 = delete_white_space(line);
-// 	element.id = *line2++;
-// 	while (*line2 == ' ')
-// 		line2++;
-// 	element.info = line2;
-// 	if (!element.info)
-// 		return (err("Error!\n", line, "\nput_to_element: malloc failed\n"));
-// 	element.img = NULL;
-// 	if (line[0] == 'N' && !config->no)
-// 		config->no = &element;
-// 	else if (line[0] == 'S' && !config->so)
-// 		config->so = &element;
-// 	else if (line[0] == 'W' && !config->we)
-// 		config->we = &element;
-// 	else if (line[0] == 'E' && !config->ea)
-// 		config->ea = &element;
-// 	else if (line[0] == 'F' && !config->f)
-// 		config->f = &element;
-// 	else if (line[0] == 'C' && !config->c)
-// 		config->c = &element;
-// 	else
-// 		return (err("Error!\nElement already present: ", line, "\n"));
-// 	config->nb_element++;
-// 	return (0);
-// }

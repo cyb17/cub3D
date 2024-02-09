@@ -6,22 +6,35 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/08 14:41:27 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/09 12:02:47 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	init_config(t_gameconfig *config)
+void	init_gameconfig(t_gameconfig *config)
 {
 	config->file = NULL;
-	config->no = 0;
-	config->so = 0;
-	config->we = 0;
-	config->ea = 0;
-	config->f = 0;
-	config->c = 0;
-	config->nb_element = 0;
 	config->map = NULL;
-	config->player = NULL;
+	config->mlx = NULL;
+	config->mlx_w = NULL;
+	config->no = NULL;
+	config->so = NULL;
+	config->we = NULL;
+	config->ea = NULL;
+	config->f = NULL;
+	config->c = NULL;
+	config->nb_element = 0;
+	config->player.pos_x = 0;
+	config->player.pos_y = 0;
+	config->player.dir_x = 0;
+	config->player.dir_y = 0;
+	config->player.camera_x = 0;
+	config->player.camera_y = 0;
+	config->img.img = NULL;
+	config->img.addr = NULL;
+	config->img.bpp = 0;
+	config->img.ll = 0;
+	config->img.ed = 0;
 }
+
