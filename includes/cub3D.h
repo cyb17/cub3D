@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/13 09:57:00 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:29:07 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ typedef struct s_player
 	double	plane_y;
 	double	camera_x;
 }			t_player;
+
+typedef struct s_ray
+{
+	int		map_x;
+	int		map_y;
+	double	ray_x;
+	double	ray_y;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+}			t_ray;
 
 typedef struct s_gameconfig
 {
