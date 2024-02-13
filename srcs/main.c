@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/09 12:00:16 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/13 10:13:28 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,20 @@ void	game_loop(t_gameconfig *game, t_imge *img)
 	mlx_loop(game->mlx);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
 	t_gameconfig	config;
 
+	if (env && !env[0])
+		return (err("Error!\n", "Environement NULL", "\n"));
 	init_gameconfig(&config);
 	if (argc == 2 && argv[1] && argv[1][0] != '\0')
 	{
 		if (check_gamefile(argv[1], &config) != 0)
+		{
+			printf("parsing error\n");
 			return (1);
+		}
 		game_loop(&config, &config.img);
 	}
 	else

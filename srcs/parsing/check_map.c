@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:43:27 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/08 14:31:35 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/13 09:46:28 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,19 @@ int	check_map_content(char **map, int size)
 	return (check_wall(map, size));
 }
 
-
+int	check_gameconfig_content(t_gameconfig *config)
+{
+	if (!config->file)
+	{
+		err("Error!\n", "Empty file\n", "");
+		return (-1);
+	}
+	if (!config->no || !config->so || !config->we || !config->ea
+		|| !config->f || !config->c || !config->map)
+	{
+		ft_putstr_fd("Error!\nGame configuration not complete\n", 2);
+		ft_putstr_fd("Please check again\n", 2);
+		return (-1);
+	}
+	return (0);
+}

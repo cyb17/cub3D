@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/09 14:25:36 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/13 09:57:00 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 	double	camera_x;
-	double	camera_y;
 }			t_player;
 
 typedef struct s_gameconfig
@@ -75,13 +74,14 @@ typedef struct s_gameconfig
 // check_gamefile
 int		check_file_path(char *gamefile);
 void	read_file_to_list(int fd, t_gameconfig *config);
-int		make_map(t_list *start, t_gameconfig *config);
+int		make_map(t_list *start, char ***map);
 int		get_info_from_list(t_gameconfig *config);
 int		check_gamefile(char *gamefile, t_gameconfig *config);
 
 // check_map
 int		check_wall(char **map, int size);
 int		check_map_content(char **map, int size);
+int		check_gameconfig_content(t_gameconfig *config);
 
 // is_element
 int		element_already_present(char *line, t_gameconfig *config);

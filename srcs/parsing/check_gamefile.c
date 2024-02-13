@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/08 15:27:06 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/13 10:11:02 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,20 @@ void	read_file_to_list(int fd, t_gameconfig *config)
 	close(fd);
 }
 
-int	make_map(t_list *start, t_gameconfig *config)
+int	make_map(t_list *start, char ***map)
 {
 	int		i;
 	int		size;
 
 	size = find_size(start);
-	config->map = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!config)
+	*map = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!*map)
 		return (err("Error!\n","Make_map: ", "Malloc failed\n"));
 	i = 0;
 	while (start)
 	{
 		if (!is_empty_line(start->content))
-			config->map[i++] = start->content;
+			(*map)[i++] = start->content;
 		else
 		{
 			while (start && is_empty_line(start->content))
@@ -75,8 +75,8 @@ int	make_map(t_list *start, t_gameconfig *config)
 		if (start)
 			start = start->next;
 	}
-	config->map[i] = NULL;
-	return (check_map_content(config->map, size));
+	(*map)[i] = NULL;
+	return (check_map_content(*map, size));
 }
 
 int	get_info_from_list(t_gameconfig *config)
@@ -93,7 +93,7 @@ int	get_info_from_list(t_gameconfig *config)
 		else if (is_empty_line(tmp->content))
 			rslt = 0;
 		else if (is_start_map(tmp->content) && config->nb_element == 6)
-			return (make_map(tmp, config)); 
+			return (make_map(tmp, &config->map)); 
 		else
 			rslt = -1;
 		if (rslt == -1)
@@ -115,7 +115,8 @@ int	check_gamefile(char *gamefile, t_gameconfig *config)
 	if (fd == -1)
 		return (-1);
 	read_file_to_list(fd, config);
-	if (get_info_from_list(config) == -1)
+	if (get_info_from_list(config) == -1
+		|| check_gameconfig_content(config) == -1)
 	{
 		garbage_collector(config);
 		return (-1);
@@ -126,5 +127,8 @@ int	check_gamefile(char *gamefile, t_gameconfig *config)
 	// 	printf("%s\n", (char *)tmp->content);
 	// 	tmp = tmp->next;
 	// }
+	// int	i = 0;
+	// while (config->map[i])
+	// 	printf("map:%s\n", config->map[i++]);
 	return (0);
 }
