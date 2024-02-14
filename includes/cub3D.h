@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 11:51:33 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 13:12:16 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		check_gameconfig_content(t_gameconfig *config);
 int		element_already_present(char *line, t_gameconfig *config);
 int		with_correct_info(char *line);
 int		is_element(char *line);
-char	*ft_strim_path(char *path, char pos);
+char	*ft_strim_path(char *path);
 
 // is_surrounded_by_wall
 int		is_surrounded_by_walls(char **map, int size, int i, int j);

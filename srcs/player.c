@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:09:22 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/14 11:00:09 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:11:20 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ void	find_start_position(t_gameconfig *config)
 	}
 }
 
-char	*ft_strim_path(char *path, char pos)
+char	*ft_strim_path(char *path)
 {
 	char	*tmp;
 	int		i;
 	int		j;
 	int 	k;
 
-	i = 0;
+	i = 1;
 	j = ft_strlen(path) - 1;
 	tmp = path;
-	while (path[i] && (path[i] == ' ' || path[i] == '\t' || path[i] == pos))
+	while (path[i] && (path[i] == ' ' || path[i] == '\t'))
 		i++;
 	while (path[j] && (path[j] == ' ' || path[j] == '\t'))
 		j--;

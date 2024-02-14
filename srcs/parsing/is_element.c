@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:38:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 11:01:48 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:10:37 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int	element_already_present(char *line, t_gameconfig *config)
 {
 	if (line[0] == 'N' && config->no == NULL)
-		config->no = ft_strim_path(line, line[0]);
+		config->no = ft_strim_path(line);
 	else if (line[0] == 'S' && config->so == NULL)
-		config->so = ft_strim_path(line, line[0]);
+		config->so = ft_strim_path(line);
 	else if (line[0] == 'W' && config->we == NULL)
-		config->we = ft_strim_path(line, line[0]);
+		config->we = ft_strim_path(line);
 	else if (line[0] == 'E' && config->ea == NULL)
-		config->ea = ft_strim_path(line, line[0]);
+		config->ea = ft_strim_path(line);
 	else if (line[0] == 'F' && config->f == NULL)
-		config->f = ft_strim_path(line, line[0]);
+		config->f = ft_strim_path(line);
 	else if (line[0] == 'C' && config->c == NULL)
-		config->c = ft_strim_path(line, line[0]);
+		config->c = ft_strim_path(line);
 	else
 	{
 		err("Error!\nElement already present: ", line, "\n");
