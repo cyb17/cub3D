@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_element.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:38:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/09 12:52:17 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 11:01:48 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int	element_already_present(char *line, t_gameconfig *config)
 {
 	if (line[0] == 'N' && config->no == NULL)
-		config->no = line;
+		config->no = ft_strim_path(line, line[0]);
 	else if (line[0] == 'S' && config->so == NULL)
-		config->so = line;
+		config->so = ft_strim_path(line, line[0]);
 	else if (line[0] == 'W' && config->we == NULL)
-		config->we = line;
+		config->we = ft_strim_path(line, line[0]);
 	else if (line[0] == 'E' && config->ea == NULL)
-		config->ea = line;
+		config->ea = ft_strim_path(line, line[0]);
 	else if (line[0] == 'F' && config->f == NULL)
-		config->f = line;
+		config->f = ft_strim_path(line, line[0]);
 	else if (line[0] == 'C' && config->c == NULL)
-		config->c = line;
+		config->c = ft_strim_path(line, line[0]);
 	else
 	{
 		err("Error!\nElement already present: ", line, "\n");
@@ -61,7 +61,7 @@ static int	check_info(char *tmp)
 		return (err("Error!\nColor code has to be between 0-255\n", "", ""));
 	return (0);
 }
-	
+
 int	with_correct_info(char *line)
 {
 	char	**tab;

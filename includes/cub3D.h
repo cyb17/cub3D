@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/13 13:29:07 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 11:08:48 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 
 # define SCREEN_W 640
 # define SCREEN_H 480
-# define FOV 0.66
 
 // bpp = bit_by_pixels
 // ll = line_length
@@ -42,6 +41,7 @@ typedef struct	s_imge
 
 typedef struct s_player
 {
+	char	start_pos;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -103,6 +103,7 @@ int		check_gameconfig_content(t_gameconfig *config);
 int		element_already_present(char *line, t_gameconfig *config);
 int		with_correct_info(char *line);
 int		is_element(char *line);
+char	*ft_strim_path(char *path, char pos);
 
 // is_surrounded_by_wall
 int		is_surrounded_by_walls(char **map, int size, int i, int j);
@@ -124,5 +125,11 @@ char	*delete_white_space(char *line);
 // game_initialization
 void	init_gameconfig(t_gameconfig *config);
 
+// game_update
+void	update_gameconfig(t_gameconfig *config);
+
+// player
+void	find_start_position(t_gameconfig *config);
+void	if_start_pos_found(t_gameconfig *config);
 
 #endif

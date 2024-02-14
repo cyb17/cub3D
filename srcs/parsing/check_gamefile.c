@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_gamefile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/13 10:11:02 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 10:30:55 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	get_info_from_list(t_gameconfig *config)
 int	check_gamefile(char *gamefile, t_gameconfig *config)
 {
 	int	fd;
-	
+
 	fd = check_file_path(gamefile);
 	if (fd == -1)
 		return (-1);
