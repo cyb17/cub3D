@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 14:08:39 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 17:13:37 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct	s_imge
 {
 	void	*img;
 	char	*addr;
+	int		width;
+	int		height;
 	int		bpp;
 	int		ll;
 	int		ed;
@@ -73,10 +75,12 @@ typedef struct s_draw
 	int	wall_height;
 	int	draw_start;
 	int	draw_end;
-	t_image	txt_no;
-	t_image	txt_so;
-	t_image	txt_we;
-	t_image	txt_ea;
+	t_imge	*txt_no;
+	t_imge	*txt_so;
+	t_imge	*txt_we;
+	t_imge	*txt_ea;
+	int		c[3];
+	int		f[3];
 }		t_draw;
 
 typedef struct s_gameconfig
@@ -95,6 +99,7 @@ typedef struct s_gameconfig
 	t_player	player;
 	t_ray		ray;
 	t_draw		draw;
+	t_imge		img;
 
 
 }				t_gameconfig;
@@ -121,10 +126,6 @@ char	*ft_strim_path(char *path);
 
 // is_surrounded_by_wall
 int		is_surrounded_by_walls(char **map, int size, int i, int j);
-
-int		parsing(char *gamefile, t_gameconfig *config);
-void	clear_list_ptr(t_list **list);
-void	garbage_collector(t_gameconfig *src);
 
 // parsing_tools
 int		err(char *msg1, char *msg2, char *msg3);
@@ -154,6 +155,14 @@ void	if_start_pos_found(t_gameconfig *config);
 // load_imge
 void	get_ply_wall_dist(t_ray *r);
 void	get_draw_info(t_draw *d, t_ray *r);
-int		load_imge(t_gameconfig *config, t_draw *d);
+t_imge	*load_img(void *mlx, char *path);
+int		load_all_texture(t_gameconfig *config, t_draw *d);
+void	get_c_code(char *c, t_draw *d);
+void	get_f_code(char *f, t_draw *d);
+
+// garbage_collector
+void	destroye_img(t_gameconfig *config, t_draw *d);
+void	clear_list_ptr(t_list **list);
+void	garbage_collector(t_gameconfig *src);
 
 #endif

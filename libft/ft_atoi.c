@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 14:48:15 by yachen            #+#    #+#             */
-/*   Updated: 2023/12/19 15:04:51 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 15:23:44 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ long	ft_atoi(const char *str)
 	}
 	return (nb * sign);
 }
-/*
-#include <stdio.h>
 
-int	main()
-{
-	printf("%d", ft_atoi("   --2147483647"));
-}*/
+// #include <stdio.h>
+
+// int	main()
+// {
+// 	printf("%ld", ft_atoi("   214,7483647"));
+// }

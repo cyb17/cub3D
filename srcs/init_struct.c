@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_initialization.c                              :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 14:04:10 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 17:03:28 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	init_imge(t_imge *imge)
 {
-	imge->imge = NULL;
+	imge->img = NULL;
 	imge->addr = NULL;
+	imge->width = 0;
+	imge->height = 0;
 	imge->bpp = 0;
 	imge->ll = 0;
 	imge->ed = 0;
@@ -26,10 +28,16 @@ static void	init_draw(t_draw *draw)
 	draw->wall_height = 0;
 	draw->draw_start = 0;
 	draw->draw_end = 0;
-	init_imge(&draw->txt_no);
-	init_imge(&draw->txt_so);
-	init_imge(&draw->txt_we);
-	init_imge(&draw->txt_ea);
+	// init_imge(&draw->txt_no);
+	// init_imge(&draw->txt_so);
+	// init_imge(&draw->txt_we);
+	// init_imge(&draw->txt_ea);
+	draw->txt_no = NULL;
+	draw->txt_so = NULL;
+	draw->txt_we = NULL;
+	draw->txt_ea = NULL;
+	ft_memset(draw->c,0, 3);
+	ft_memset(draw->f,0, 3);
 }
 
 static void	init_ray(t_ray *r)
@@ -69,6 +77,7 @@ void	init_gameconfig(t_gameconfig *config)
 	config->player.plane_x = 0;
 	config->player.plane_y = 0;
 	config->player.camera_x = 0;
-	init_ray(config->ray);
-	init_draw(config->draw);
+	init_ray(&config->ray);
+	init_draw(&config->draw);
+	init_imge(&config->img);
 }

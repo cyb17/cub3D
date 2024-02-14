@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_gamefile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 10:30:55 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:38:41 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,5 @@ int	check_gamefile(char *gamefile, t_gameconfig *config)
 		garbage_collector(config);
 		return (-1);
 	}
-	// t_list	*tmp = config->file;
-	// while (tmp)
-	// {
-	// 	printf("%s\n", (char *)tmp->content);
-	// 	tmp = tmp->next;
-	// }
-	// int	i = 0;
-	// while (config->map[i])
-	// 	printf("map:%s\n", config->map[i++]);
 	return (0);
 }
