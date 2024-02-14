@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 13:59:12 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/14 14:08:39 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,16 @@ void	find_ray(t_ray *r, t_player *ply);
 void	ft_DDA(t_ray *r, char **map);
 
 // game_update
-
 void	update_gameconfig(t_gameconfig *config);
 
 // player
+char	*ft_strim_path(char *path);
 void	find_start_position(t_gameconfig *config);
 void	if_start_pos_found(t_gameconfig *config);
+
+// load_imge
+void	get_ply_wall_dist(t_ray *r);
+void	get_draw_info(t_draw *d, t_ray *r);
+int		load_imge(t_gameconfig *config, t_draw *d);
 
 #endif
