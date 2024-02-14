@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 11:08:48 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:51:33 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,19 @@ typedef struct s_ray
 	double	delta_y;
 	double	side_x;
 	double	side_y;
+	double	p_w_dist;
 	int		step_x;
 	int		step_y;
 	int		hit;
 	int		side;
 }			t_ray;
+
+typedef struct s_draw
+{
+	int	wall_height;
+	int	draw_start;
+	int	draw_end;
+}		t_draw;
 
 typedef struct s_gameconfig
 {
@@ -81,6 +89,7 @@ typedef struct s_gameconfig
 	char		*c;
 	int			nb_element;
 	t_player	player;
+	t_ray		ray;
 	t_imge		img;
 
 }				t_gameconfig;
