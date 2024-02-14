@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 13:12:16 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:59:12 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ typedef struct s_draw
 	int	wall_height;
 	int	draw_start;
 	int	draw_end;
+	t_image	txt_no;
+	t_image	txt_so;
+	t_image	txt_we;
+	t_image	txt_ea;
 }		t_draw;
 
 typedef struct s_gameconfig
@@ -90,7 +94,8 @@ typedef struct s_gameconfig
 	int			nb_element;
 	t_player	player;
 	t_ray		ray;
-	t_imge		img;
+	t_draw		draw;
+
 
 }				t_gameconfig;
 
@@ -134,7 +139,12 @@ char	*delete_white_space(char *line);
 // game_initialization
 void	init_gameconfig(t_gameconfig *config);
 
+// raycasting
+void	find_ray(t_ray *r, t_player *ply);
+void	ft_DDA(t_ray *r, char **map);
+
 // game_update
+
 void	update_gameconfig(t_gameconfig *config);
 
 // player

@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 13:02:54 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:04:47 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	update_gameconfig(t_gameconfig *config)
+{
+	find_start_position(config);
+	if_start_pos_found(config);
+	find_ray(config->ray,config->player);
+	ft_DDA(config->ray, config->map);
+	get_ply_wall_dist(config->ray);
+	get_draw_info(config->draw, config->ray);
+	
+}
 
 void	my_mlx_pixel_put(t_imge *img, int x, int y, int color)
 {

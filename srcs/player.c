@@ -3,37 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 09:09:22 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/14 13:11:20 by jp-de-to         ###   ########.fr       */
+/*   Created: 2024/02/14 14:01:17 by yachen            #+#    #+#             */
+/*   Updated: 2024/02/14 14:02:22 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	if_start_pos_found(t_gameconfig *config)
+char	*ft_strim_path(char *path)
 {
-	if (config->player.start_pos == 'N')
-	{
-		config->player.dir_x = -1;
-		config->player.plane_y = 0.66;
-	}
-	if (config->player.start_pos == 'S')
-	{
-		config->player.dir_x = 1;
-		config->player.plane_y = -0.66;
-	}
-	if (config->player.start_pos == 'W')
-	{
-		config->player.dir_y = -1;
-		config->player.plane_x = -0.66;
-	}
-	if (config->player.start_pos == 'E')
-	{
-		config->player.dir_y = 1;
-		config->player.plane_x = 0.66;
-	}
+	char	*tmp;
+	int		i;
+	int		j;
+	int 	k;
+
+	i = 1;
+	j = ft_strlen(path) - 1;
+	tmp = path;
+	while (path[i] && (path[i] == ' ' || path[i] == '\t'))
+		i++;
+	while (path[j] && (path[j] == ' ' || path[j] == '\t'))
+		j--;
+	k = 0;
+	while (i <= j)
+		tmp[k++] = path[i++];
+	tmp[k] = '\0';
+	return (tmp);
 }
 
 void	find_start_position(t_gameconfig *config)
@@ -61,24 +58,26 @@ void	find_start_position(t_gameconfig *config)
 	}
 }
 
-char	*ft_strim_path(char *path)
+void	if_start_pos_found(t_gameconfig *config)
 {
-	char	*tmp;
-	int		i;
-	int		j;
-	int 	k;
-
-	i = 1;
-	j = ft_strlen(path) - 1;
-	tmp = path;
-	while (path[i] && (path[i] == ' ' || path[i] == '\t'))
-		i++;
-	while (path[j] && (path[j] == ' ' || path[j] == '\t'))
-		j--;
-	k = 0;
-	while (i <= j)
-		tmp[k++] = path[i++];
-	tmp[k] = '\0';
-	return (tmp);
+	if (config->player.start_pos == 'N')
+	{
+		config->player.dir_x = -1;
+		config->player.plane_y = 0.66;
+	}
+	if (config->player.start_pos == 'S')
+	{
+		config->player.dir_x = 1;
+		config->player.plane_y = -0.66;
+	}
+	if (config->player.start_pos == 'W')
+	{
+		config->player.dir_y = -1;
+		config->player.plane_x = -0.66;
+	}
+	if (config->player.start_pos == 'E')
+	{
+		config->player.dir_y = 1;
+		config->player.plane_x = 0.66;
+	}
 }
-

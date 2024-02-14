@@ -3,14 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   game_initialization.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 13:14:31 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:04:10 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+static void	init_imge(t_imge *imge)
+{
+	imge->imge = NULL;
+	imge->addr = NULL;
+	imge->bpp = 0;
+	imge->ll = 0;
+	imge->ed = 0;
+}
+
+static void	init_draw(t_draw *draw)
+{
+	draw->wall_height = 0;
+	draw->draw_start = 0;
+	draw->draw_end = 0;
+	init_imge(&draw->txt_no);
+	init_imge(&draw->txt_so);
+	init_imge(&draw->txt_we);
+	init_imge(&draw->txt_ea);
+}
+
+static void	init_ray(t_ray *r)
+{
+	r->map_x = 0;
+	r->map_y= 0;
+	r->ray_x = 0.0;
+	r->ray_y = 0.0;
+	r->delta_x = 0.0;
+	r->delta_y = 0.0;
+	r->side_x = 0;
+	r->side_y = 0;
+	r->p_w_dist = 0;
+	r->step_x = 0;
+	r->step_y = 0;
+	r->hit = 0;
+	r->side = 0;
+}
 
 void	init_gameconfig(t_gameconfig *config)
 {
@@ -32,15 +69,6 @@ void	init_gameconfig(t_gameconfig *config)
 	config->player.plane_x = 0;
 	config->player.plane_y = 0;
 	config->player.camera_x = 0;
-	config->img.img = NULL;
-	config->img.addr = NULL;
-	config->img.bpp = 0;
-	config->img.ll = 0;
-	config->img.ed = 0;
-}
-
-void	update_gameconfig(t_gameconfig *config)
-{
-	find_start_position(config);
-	if_start_pos_found(config);
+	init_ray(config->ray);
+	init_draw(config->draw);
 }
