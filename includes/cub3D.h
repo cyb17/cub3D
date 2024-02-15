@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 17:13:37 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:07:58 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ typedef struct s_ray
 
 typedef struct s_draw
 {
-	int	wall_height;
-	int	draw_start;
-	int	draw_end;
+	int		wall_height;
+	int		draw_start;
+	int		draw_end;
 	t_imge	*txt_no;
 	t_imge	*txt_so;
 	t_imge	*txt_we;
@@ -137,7 +137,7 @@ char	*delete_white_space(char *line);
 
 /* EXECUTION */
 
-// game_initialization
+// init_struct
 void	init_gameconfig(t_gameconfig *config);
 
 // raycasting
@@ -153,16 +153,26 @@ void	find_start_position(t_gameconfig *config);
 void	if_start_pos_found(t_gameconfig *config);
 
 // load_imge
-void	get_ply_wall_dist(t_ray *r);
-void	get_draw_info(t_draw *d, t_ray *r);
 t_imge	*load_img(void *mlx, char *path);
 int		load_all_texture(t_gameconfig *config, t_draw *d);
-void	get_c_code(char *c, t_draw *d);
-void	get_f_code(char *f, t_draw *d);
+// void	get_c_code(char *c, t_draw *d);
+// void	get_f_code(char *f, t_draw *d);
+void	get_c_or_f_info(char *str, int tab[3]);
+
 
 // garbage_collector
 void	destroye_img(t_gameconfig *config, t_draw *d);
 void	clear_list_ptr(t_list **list);
 void	garbage_collector(t_gameconfig *src);
+
+// tools
+void	get_ply_wall_dist(t_ray *r);
+void	get_draw_info(t_draw *d, t_ray *r);
+void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
+int		find_color(int r, int g, int b);
+
+// display
+void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img);
+
 
 #endif

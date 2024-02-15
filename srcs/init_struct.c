@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 17:03:28 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/15 13:31:31 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@ static void	init_draw(t_draw *draw)
 	draw->wall_height = 0;
 	draw->draw_start = 0;
 	draw->draw_end = 0;
-	// init_imge(&draw->txt_no);
-	// init_imge(&draw->txt_so);
-	// init_imge(&draw->txt_we);
-	// init_imge(&draw->txt_ea);
 	draw->txt_no = NULL;
 	draw->txt_so = NULL;
 	draw->txt_we = NULL;

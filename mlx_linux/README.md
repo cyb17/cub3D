@@ -52,4 +52,4 @@ Install MinilibX
      - man/man3/mlx*.1 in /usr/X11/man/man3 or /usr/local/man/man3
 
 
- Olivier CROUZET - 2014-01-06 -
+ Olivier CROUZET - 2014-01-06 - 
