@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/15 16:57:37 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:25:01 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	update_gameconfig(t_gameconfig *config)
 	get_draw_info(&config->draw, &config->ray);
 	get_c_or_f_info(config->c, config->draw.c);
 	get_c_or_f_info(config->f, config->draw.f);
-	load_all_texture(config, &config->draw);
 }
 
 void	game_loop(t_gameconfig *config, t_imge *img)
@@ -34,8 +33,9 @@ void	game_loop(t_gameconfig *config, t_imge *img)
 	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
 // fonction qui dessine les murs dans img->img
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
-	sleep(3);
-	mlx_put_image_to_window(config->mlx, config->mlx_w, config->draw.txt_no->img, 0, 0);
+	load_all_texture(config, &config->draw);
+	// sleep(3);
+	// mlx_put_image_to_window(config->mlx, config->mlx_w, config->draw.txt_no->img, 0, 0);
 	mlx_loop(config->mlx);
 }
 
