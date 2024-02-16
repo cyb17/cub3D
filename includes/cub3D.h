@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/16 09:48:50 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:54:08 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ typedef struct s_gameconfig
 	t_ray		ray;
 	t_draw		draw;
 	t_imge		img;
-
-
 }				t_gameconfig;
 
 /* PARSING */
@@ -172,8 +170,10 @@ int		find_color(int r, int g, int b);
 
 // display
 void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img);
+void	put_wall_to_window(t_draw *d, t_imge *img, int x);
+void	loop_ray(t_gameconfig *config);
 
 // keys
-int	shut_down_game(void *param);
+int		shut_down_game(void *param);
 
 #endif

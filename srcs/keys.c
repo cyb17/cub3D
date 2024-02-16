@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:19:18 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/16 09:05:02 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:54:33 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int	shut_down_game(void *param)
 
 	game = (t_gameconfig *)param;
 	garbage_collector(game);
-	return (0);
+	exit (0);
 }

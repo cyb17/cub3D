@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/16 10:03:53 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:56:47 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
-void	update_gameconfig(t_gameconfig *config)
-{
-	find_start_position(config);
-	if_start_pos_found(config);
-	find_ray(&config->ray, &config->player);
-	ft_DDA(&config->ray, config->map);
-	get_ply_wall_dist(&config->ray);
-	get_draw_info(&config->draw, &config->ray);
-	get_c_or_f_info(config->c, config->draw.c);
-	get_c_or_f_info(config->f, config->draw.f);
-}
 
 void	game_loop(t_gameconfig *config, t_imge *img)
 {
@@ -31,6 +19,7 @@ void	game_loop(t_gameconfig *config, t_imge *img)
 	img->img = mlx_new_image(config->mlx, SCREEN_W, SCREEN_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->ll, &img->ed);
 	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
+	loop_ray(config);
 	// fonction qui dessine les murs dans img->img
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
 	load_all_texture(config, &config->draw);

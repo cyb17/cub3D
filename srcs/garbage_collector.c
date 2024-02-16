@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/16 10:06:42 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:18:13 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	garbage_collector(t_gameconfig *config)
 	if (config->mlx)
 	{
 		mlx_destroy_display(config->mlx);
-		// free(config->mlx);
+		free(config->mlx);
 	}
 	if (config->file)
 		clear_list_ptr(&config->file);
