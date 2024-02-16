@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/15 17:25:01 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/16 10:03:53 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ void	game_loop(t_gameconfig *config, t_imge *img)
 	img->img = mlx_new_image(config->mlx, SCREEN_W, SCREEN_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->ll, &img->ed);
 	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
-// fonction qui dessine les murs dans img->img
+	// fonction qui dessine les murs dans img->img
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
 	load_all_texture(config, &config->draw);
-	// sleep(3);
-	// mlx_put_image_to_window(config->mlx, config->mlx_w, config->draw.txt_no->img, 0, 0);
+	mlx_hook(config->mlx_w, 17, 0, shut_down_game, config);
 	mlx_loop(config->mlx);
 }
 

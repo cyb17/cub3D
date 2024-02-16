@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/15 16:37:02 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/16 10:06:42 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,16 @@
 
 void	destroye_img(t_gameconfig *config, t_draw *d)
 {
-	if (d->txt_no->img)
+	if (d->txt_no)
 		mlx_destroy_image(config->mlx, d->txt_no->img);
-	if (d->txt_so->img)
+	if (d->txt_so)
 		mlx_destroy_image(config->mlx, d->txt_so->img);
-	if (d->txt_we->img)
+	if (d->txt_we)
 		mlx_destroy_image(config->mlx, d->txt_we->img);
-	if (d->txt_ea->img)
+	if (d->txt_ea)
 		mlx_destroy_image(config->mlx, d->txt_ea->img);
-	if (d->txt_no->addr)
-		free(d->txt_no->addr);
-	if (d->txt_so->addr)
-		free(d->txt_so->addr);
-	if (d->txt_we->addr)
-		free(d->txt_we->addr);
-	if (d->txt_ea->addr)
-		free(d->txt_ea->addr);
+	if (&config->img)
+		mlx_destroy_image(config->mlx, config->img.img);
 }
 
 void	free_img_ptr(t_gameconfig *config)
@@ -47,7 +41,7 @@ void	free_img_ptr(t_gameconfig *config)
 void	clear_list_ptr(t_list **list)
 {
 	t_list	*tmp;
-	
+
 	while (*list)
 	{
 		tmp = *list;
@@ -67,7 +61,7 @@ void	garbage_collector(t_gameconfig *config)
 	if (config->mlx)
 	{
 		mlx_destroy_display(config->mlx);
-		free(config->mlx);
+		// free(config->mlx);
 	}
 	if (config->file)
 		clear_list_ptr(&config->file);

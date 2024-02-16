@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/15 17:07:58 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/16 09:48:50 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ int		load_all_texture(t_gameconfig *config, t_draw *d);
 // void	get_f_code(char *f, t_draw *d);
 void	get_c_or_f_info(char *str, int tab[3]);
 
-
 // garbage_collector
 void	destroye_img(t_gameconfig *config, t_draw *d);
 void	clear_list_ptr(t_list **list);
@@ -174,5 +173,7 @@ int		find_color(int r, int g, int b);
 // display
 void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img);
 
+// keys
+int	shut_down_game(void *param);
 
 #endif
