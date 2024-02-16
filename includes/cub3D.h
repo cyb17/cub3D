@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/16 10:54:08 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/16 14:37:37 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	*delete_white_space(char *line);
 void	init_gameconfig(t_gameconfig *config);
 
 // raycasting
-void	find_ray(t_ray *r, t_player *ply);
+void	find_ray(t_ray *r, t_player *ply, int x);
 void	ft_DDA(t_ray *r, char **map);
 
 // game_update
@@ -163,7 +163,7 @@ void	clear_list_ptr(t_list **list);
 void	garbage_collector(t_gameconfig *src);
 
 // tools
-void	get_ply_wall_dist(t_ray *r);
+void	get_ply_wall_dist(t_ray *r, t_player *p);
 void	get_draw_info(t_draw *d, t_ray *r);
 void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
 int		find_color(int r, int g, int b);

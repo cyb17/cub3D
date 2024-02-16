@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:34:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/15 16:37:41 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/16 17:36:48 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	get_ply_wall_dist(t_ray *r)
+void	get_ply_wall_dist(t_ray *r, t_player *p)
 {
-	if(r->side == 0) 
-		r->p_w_dist = (r->side_x - r->delta_x);
-    else
-	  r->p_w_dist = (r->side_y - r->delta_y);
+	if (r->side == 0) 
+	{
+		r->p_w_dist = ((double)r->map_x - p->pos_x + (1 / (double)r->step_x) / 2) / r->ray_x;
+	}
+	else
+		r->p_w_dist = ((double)r->map_y - p->pos_y + (1 / (double)r->step_y) / 2) / r->ray_y;
 }
 
 void	get_draw_info(t_draw *d, t_ray *r)
 {
-	d->wall_height = SCREEN_H / r->p_w_dist;
+	d->wall_height = (int)(SCREEN_H / r->p_w_dist);
 	d->draw_start = SCREEN_H / 2 - d->wall_height / 2;
 	if (d->draw_start < 0)
 		d->draw_start = 0;
