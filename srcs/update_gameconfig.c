@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   update_gameconfig.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 14:01:17 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 14:02:22 by yachen           ###   ########.fr       */
+/*   Created: 2024/02/18 12:25:02 by yachen            #+#    #+#             */
+/*   Updated: 2024/02/18 12:28:23 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,36 @@ void	if_start_pos_found(t_gameconfig *config)
 		config->player.dir_y = 1;
 		config->player.plane_x = 0.66;
 	}
+}
+
+void	get_c_or_f_info(char *str, int tab[3])
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == ','))
+		i++;
+	tab[0] = ft_atoi(str + i);
+	while (ft_isdigit(str[i]) != 0)
+		i++;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == ','))
+		i++;
+	tab[1] = ft_atoi(str + i);
+	while (ft_isdigit(str[i]) != 0)
+		i++;
+	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == ','))
+		i++;
+	tab[2] = ft_atoi(str + i);
+}
+
+void	update_gameconfig(t_gameconfig *config)
+{
+	find_start_position(config);
+	if_start_pos_found(config);
+	// find_ray(&config->ray, &config->player);
+	// ft_DDA(&config->ray, config->map);
+	// get_ply_wall_dist(&config->ray);
+	// get_draw_info(&config->draw, &config->ray);
+	get_c_or_f_info(config->c, config->draw.c);
+	get_c_or_f_info(config->f, config->draw.f);
 }

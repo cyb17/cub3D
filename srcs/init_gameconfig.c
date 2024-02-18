@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   init_gameconfig.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/16 08:49:12 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:23:36 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_gameconfig(t_gameconfig *config)
 	config->nb_element = 0;
 	config->player.pos_x = 0.0;
 	config->player.pos_y = 0.0;
-	config->player.dir_x = -1;
+	config->player.dir_x = 0;
 	config->player.dir_y = 0;
 	config->player.plane_x = 0;
 	config->player.plane_y = 0;

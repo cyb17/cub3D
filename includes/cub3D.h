@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/16 14:37:37 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:36:52 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,23 +139,25 @@ char	*delete_white_space(char *line);
 void	init_gameconfig(t_gameconfig *config);
 
 // raycasting
+void	update_side(t_ray *r, t_player * ply);
 void	find_ray(t_ray *r, t_player *ply, int x);
 void	ft_DDA(t_ray *r, char **map);
 
-// game_update
-void	update_gameconfig(t_gameconfig *config);
-
-// player
+// update_gameconfig
 char	*ft_strim_path(char *path);
 void	find_start_position(t_gameconfig *config);
 void	if_start_pos_found(t_gameconfig *config);
+void	get_c_or_f_info(char *str, int tab[3]);
+void	update_gameconfig(t_gameconfig *config);
+
+// game_loop
+void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img);
+void	loop_ray(t_gameconfig *config);
+void	game_loop(t_gameconfig *config, t_imge *img);
 
 // load_imge
 t_imge	*load_img(void *mlx, char *path);
 int		load_all_texture(t_gameconfig *config, t_draw *d);
-// void	get_c_code(char *c, t_draw *d);
-// void	get_f_code(char *f, t_draw *d);
-void	get_c_or_f_info(char *str, int tab[3]);
 
 // garbage_collector
 void	destroye_img(t_gameconfig *config, t_draw *d);
@@ -167,11 +169,8 @@ void	get_ply_wall_dist(t_ray *r, t_player *p);
 void	get_draw_info(t_draw *d, t_ray *r);
 void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
 int		find_color(int r, int g, int b);
-
-// display
-void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img);
 void	put_wall_to_window(t_draw *d, t_imge *img, int x);
-void	loop_ray(t_gameconfig *config);
+void    print_all_data(t_gameconfig *config);
 
 // keys
 int		shut_down_game(void *param);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+         #
+#    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/02/16 08:22:30 by jp-de-to         ###   ########.fr        #
+#    Updated: 2024/02/18 12:39:38 by yachen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ RM = rm -rf
 
 PARSING = check_gamefile is_element is_surrounded_by_wall check_map parsing_tools \
 
-EXECUTION = main garbage_collector init_struct player raycasting load_imge tools display keys
+EXECUTION = main garbage_collector init_gameconfig update_gameconfig raycasting \
+			load_imge tools keys game_loop
 
 SRC = $(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
 	  $(addsuffix .c, $(addprefix srcs/, $(EXECUTION))) \

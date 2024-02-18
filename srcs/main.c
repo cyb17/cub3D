@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:18:28 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/16 12:04:18 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:29:22 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
-void	game_loop(t_gameconfig *config, t_imge *img)
-{
-	config->mlx = mlx_init();
-	config->mlx_w = mlx_new_window(config->mlx, SCREEN_W, SCREEN_H, "cub3D");
-	img->img = mlx_new_image(config->mlx, SCREEN_W, SCREEN_H);
-	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->ll, &img->ed);
-	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
-	loop_ray(config);
-	// fonction qui dessine les murs dans img->img
-	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
-	load_all_texture(config, &config->draw);
-	mlx_hook(config->mlx_w, 17, 0, shut_down_game, config);
-	mlx_loop(config->mlx);
-}
 
 int	main(int argc, char **argv, char **env)
 {
