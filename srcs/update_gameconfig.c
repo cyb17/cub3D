@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_gameconfig.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:25:02 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 12:28:23 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/18 16:02:45 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	find_start_position(t_gameconfig *config)
 			|| map[y][x] == 'W')
 			{
 				config->player.start_pos = map[y][x];
-				config->player.pos_x = x + 0.5;
-				config->player.pos_y = y + 0.5;
+				config->player.pos_x = y + 0.5;
+				config->player.pos_y = x + 0.5;
 				break ;
 			}
 		}

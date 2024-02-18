@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:57:13 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 12:36:45 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/18 16:30:01 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	find_ray(t_ray *r, t_player *ply, int x)
 
 void	ft_DDA(t_ray *r, char **map)
 {
+	r->hit = 0;
 	while (r->hit == 0)
 	{
 		if (r->side_x < r->side_y)
@@ -70,7 +71,7 @@ void	ft_DDA(t_ray *r, char **map)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (map[r->map_y][r->map_x] > 0)
+		if (map[r->map_y][r->map_x] == '1')
 			r->hit = 1;
 	}
 }

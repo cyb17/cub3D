@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:34:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 12:31:59 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/18 16:50:41 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 void	get_ply_wall_dist(t_ray *r, t_player *p)
 {
 	if (r->side == 0) 
-	{
-		r->p_w_dist = ((double)r->map_x - p->pos_x + (1 / (double)r->step_x) / 2) / r->ray_x;
-	}
+		r->p_w_dist = ((double)r->map_x - p->pos_x + (1 - (double)r->step_x) / 2) / r->ray_x;
 	else
-		r->p_w_dist = ((double)r->map_y - p->pos_y + (1 / (double)r->step_y) / 2) / r->ray_y;
+		r->p_w_dist = ((double)r->map_y - p->pos_y + (1 - (double)r->step_y) / 2) / r->ray_y;
 }
 
 void	get_draw_info(t_draw *d, t_ray *r)
@@ -75,11 +73,24 @@ void    print_all_data(t_gameconfig *config)
     printf("camera_x: %f\n\n----------------\n", p->camera_x);
 }
 
-void	put_wall_to_window(t_draw *d, t_imge *img, int x)
+void	put_wall_to_window(t_ray *r, t_draw *d, t_imge *img, int x)
 {
 	while (d->draw_start <= d->draw_end)
 	{
-		my_mlx_pixel_put(img, x, d->draw_start, 16216947);
+		if (r->side == 1)
+		{
+			if (r->ray_y < 0)
+				my_mlx_pixel_put(img, x, d->draw_start, find_color(255, 255, 255)); // W_wall
+			else
+				my_mlx_pixel_put(img, x, d->draw_start, find_color(160, 160, 160)); // E_wall
+		}
+		else
+		{
+			if (r->ray_x < 0)
+				my_mlx_pixel_put(img, x, d->draw_start, find_color(0, 0, 0)); // N_wall
+			else
+				my_mlx_pixel_put(img, x, d->draw_start, find_color(96, 96, 96)); // S_wall
+		}
 		d->draw_start++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 12:31:41 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/18 16:57:03 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ void	loop_ray(t_gameconfig *config)
 	int	x;
 
 	x = 0;
-	while (x <= SCREEN_W)
+	while (x < SCREEN_W)
 	{
 		config->ray.hit = 0;
+		config->ray.p_w_dist = 0;
 		find_ray(&config->ray, &config->player, x);
 		ft_DDA(&config->ray, config->map);
 		get_ply_wall_dist(&config->ray, &config->player);
 		get_draw_info(&config->draw, &config->ray);
-		if (x == 0 || x == 320 || x == 640)
-			print_all_data(config);
-		put_wall_to_window(&config->draw, &config->img, x);
+		put_wall_to_window(&config->ray, &config->draw, &config->img, x);
 		x++;
 	}
 }
@@ -34,7 +33,7 @@ void	loop_ray(t_gameconfig *config)
 void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img)
 {
 	int	floor;
-	int ceiling;
+	int	ceiling;
 	int	x;
 	int	y;
 
@@ -63,10 +62,10 @@ void	game_loop(t_gameconfig *config, t_imge *img)
 	img->img = mlx_new_image(config->mlx, SCREEN_W, SCREEN_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->ll, &img->ed);
 	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
+	load_all_texture(config, &config->draw);
 	loop_ray(config);
 	// fonction qui dessine les murs dans img->img
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
-	// load_all_texture(config, &config->draw);
 	mlx_hook(config->mlx_w, 17, 0, shut_down_game, config);
 	mlx_loop(config->mlx);
 }
