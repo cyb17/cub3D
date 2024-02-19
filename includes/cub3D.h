@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 16:49:18 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:17:07 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define SCREEN_W 640
 # define SCREEN_H 480
+# define ROT_SPEED 0.045
+# define MOV_SPEED 0.5
 
 // bpp = bit_by_pixels
 // ll = line_length
@@ -172,7 +174,9 @@ int		find_color(int r, int g, int b);
 void	put_wall_to_window(t_ray *r, t_draw *d, t_imge *img, int x);
 void    print_all_data(t_gameconfig *config);
 
-// keys
-int		shut_down_game(void *param);
+// keys_mouse_hook
+int		mouse_hook(void *param);
+int		key_hook(int keysym, t_gameconfig *config);
+void	display(t_gameconfig *config, t_imge *img);
 
 #endif

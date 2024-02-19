@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/19 14:40:20 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:16:35 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,28 @@ void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img)
 	}
 }
 
+void	display(t_gameconfig *config, t_imge *img)
+{
+	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
+	loop_ray(config);
+	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
+}
+
 void	game_loop(t_gameconfig *config, t_imge *img)
 {
 	config->mlx = mlx_init();
 	config->mlx_w = mlx_new_window(config->mlx, SCREEN_W, SCREEN_H, "cub3D");
 	img->img = mlx_new_image(config->mlx, SCREEN_W, SCREEN_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->ll, &img->ed);
+	if (load_all_texture(config, &config->draw) == -1)
+	{
+		garbage_collector(config);
+		exit(1);
+	}
 	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
-	load_all_texture(config, &config->draw);
 	loop_ray(config);
-	// fonction qui dessine les murs dans img->img
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
-	mlx_hook(config->mlx_w, 17, 0, shut_down_game, config);
+	mlx_key_hook(config->mlx_w, key_hook, config);
+	mlx_hook(config->mlx_w, 17, 0, mouse_hook, config);
 	mlx_loop(config->mlx);
 }
