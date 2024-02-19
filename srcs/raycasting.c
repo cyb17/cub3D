@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:57:13 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 16:30:01 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:40:46 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_DDA(t_ray *r, char **map)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (map[r->map_y][r->map_x] == '1')
+		if (map[r->map_x][r->map_y] == '1')
 			r->hit = 1;
 	}
 }

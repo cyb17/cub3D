@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 16:57:03 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:40:20 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	loop_ray(t_gameconfig *config)
 	x = 0;
 	while (x < SCREEN_W)
 	{
-		config->ray.hit = 0;
 		config->ray.p_w_dist = 0;
 		find_ray(&config->ray, &config->player, x);
 		ft_DDA(&config->ray, config->map);
