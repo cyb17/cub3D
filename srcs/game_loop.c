@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/19 17:16:35 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/21 16:05:27 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	game_loop(t_gameconfig *config, t_imge *img)
 	put_floor_and_ceiling_to_window(config->draw.c, config->draw.f, img);
 	loop_ray(config);
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
-	mlx_key_hook(config->mlx_w, key_hook, config);
+	mlx_hook(config->mlx_w, KeyPress, KeyPressMask, key_hook, config);
 	mlx_hook(config->mlx_w, 17, 0, mouse_hook, config);
 	mlx_loop(config->mlx);
 }
