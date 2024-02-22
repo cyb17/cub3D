@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:34:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 16:50:41 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:50:29 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_ply_wall_dist(t_ray *r, t_player *p)
 {
-	if (r->side == 0) 
+	if (r->side == 0)
 		r->p_w_dist = ((double)r->map_x - p->pos_x + (1 - (double)r->step_x) / 2) / r->ray_x;
 	else
 		r->p_w_dist = ((double)r->map_y - p->pos_y + (1 - (double)r->step_y) / 2) / r->ray_y;
@@ -73,8 +73,13 @@ void    print_all_data(t_gameconfig *config)
     printf("camera_x: %f\n\n----------------\n", p->camera_x);
 }
 
-void	put_wall_to_window(t_ray *r, t_draw *d, t_imge *img, int x)
+void	put_wall_to_window(t_gameconfig *c, t_imge *img, int x)
 {
+	t_ray	*r;
+	t_draw	*d;
+
+	r = &c->ray;
+	d = &c->draw;
 	while (d->draw_start <= d->draw_end)
 	{
 		if (r->side == 1)

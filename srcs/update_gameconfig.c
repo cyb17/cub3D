@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:25:02 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 16:02:45 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:37:31 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strim_path(char *path)
 	char	*tmp;
 	int		i;
 	int		j;
-	int 	k;
+	int		k;
 
 	i = 1;
 	j = ft_strlen(path) - 1;
@@ -58,7 +58,7 @@ void	find_start_position(t_gameconfig *config)
 	}
 }
 
-void	if_start_pos_found(t_gameconfig *config)
+void	init_dir_plane(t_gameconfig *config)
 {
 	if (config->player.start_pos == 'N')
 	{
@@ -105,11 +105,7 @@ void	get_c_or_f_info(char *str, int tab[3])
 void	update_gameconfig(t_gameconfig *config)
 {
 	find_start_position(config);
-	if_start_pos_found(config);
-	// find_ray(&config->ray, &config->player);
-	// ft_DDA(&config->ray, config->map);
-	// get_ply_wall_dist(&config->ray);
-	// get_draw_info(&config->draw, &config->ray);
+	init_dir_plane(config);
 	get_c_or_f_info(config->c, config->draw.c);
 	get_c_or_f_info(config->f, config->draw.f);
 }

@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/21 16:07:01 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:56:00 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define SCREEN_W 640
 # define SCREEN_H 480
 # define ROT_SPEED 0.045
-# define MOV_SPEED 0.5
+# define MOV_SPEED 0.20
 
 // bpp = bit_by_pixels
 // ll = line_length
@@ -84,6 +84,9 @@ typedef struct s_draw
 	t_imge	*txt_ea;
 	int		c[3];
 	int		f[3];
+	int		pix_x;
+	int		pix_y;
+	int		color;
 }		t_draw;
 
 typedef struct s_gameconfig
@@ -142,14 +145,14 @@ char	*delete_white_space(char *line);
 void	init_gameconfig(t_gameconfig *config);
 
 // raycasting
-void	update_side(t_ray *r, t_player * ply);
+void	update_side(t_ray *r, t_player *ply);
 void	find_ray(t_ray *r, t_player *ply, int x);
 void	ft_DDA(t_ray *r, char **map);
 
 // update_gameconfig
 char	*ft_strim_path(char *path);
 void	find_start_position(t_gameconfig *config);
-void	if_start_pos_found(t_gameconfig *config);
+void	init_dir_plane(t_gameconfig *config);
 void	get_c_or_f_info(char *str, int tab[3]);
 void	update_gameconfig(t_gameconfig *config);
 
@@ -172,7 +175,7 @@ void	get_ply_wall_dist(t_ray *r, t_player *p);
 void	get_draw_info(t_draw *d, t_ray *r);
 void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
 int		find_color(int r, int g, int b);
-void	put_wall_to_window(t_ray *r, t_draw *d, t_imge *img, int x);
+void	put_wall_to_window(t_gameconfig *c, t_imge *img, int x);
 void    print_all_data(t_gameconfig *config);
 
 // keys_mouse_hook

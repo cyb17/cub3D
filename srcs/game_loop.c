@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/21 16:05:27 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:26:34 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	loop_ray(t_gameconfig *config)
 	x = 0;
 	while (x < SCREEN_W)
 	{
-		config->ray.p_w_dist = 0;
 		find_ray(&config->ray, &config->player, x);
 		ft_DDA(&config->ray, config->map);
 		get_ply_wall_dist(&config->ray, &config->player);
 		get_draw_info(&config->draw, &config->ray);
-		put_wall_to_window(&config->ray, &config->draw, &config->img, x);
+		put_wall_to_window(config, &config->img, x);
+		// put_wall_pixel_colon(t_draw *d)
 		x++;
 	}
 }
@@ -42,7 +42,7 @@ void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img)
 	while (y <= SCREEN_H)
 	{
 		x = 0;
-		while (x <= SCREEN_W)
+		while (x < SCREEN_W)
 		{
 			if (y < SCREEN_H / 2)
 				my_mlx_pixel_put(img, x, y, ceiling);
