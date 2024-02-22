@@ -6,7 +6,7 @@
 #    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/02/19 16:24:54 by yachen           ###   ########.fr        #
+#    Updated: 2024/02/22 15:57:24 by yachen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ RM = rm -rf
 PARSING = check_gamefile is_element is_surrounded_by_wall check_map parsing_tools \
 
 EXECUTION = main garbage_collector init_gameconfig update_gameconfig raycasting \
-			load_imge tools keys_mouse_hook game_loop
+			load_imge tools tools_2 keys_mouse_hook game_loop
 
 SRC = $(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
 	  $(addsuffix .c, $(addprefix srcs/, $(EXECUTION))) \

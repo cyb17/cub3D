@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/21 16:05:27 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:10:55 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ void	loop_ray(t_gameconfig *config)
 		ft_DDA(&config->ray, config->map);
 		get_ply_wall_dist(&config->ray, &config->player);
 		get_draw_info(&config->draw, &config->ray);
-		put_wall_to_window(&config->ray, &config->draw, &config->img, x);
+		if (x == 0 || x == 320 || x == 639)
+		{
+			print_all_data(config, x);
+			find_pixel_color_in_txt(config, &config->draw, config->draw.txt_no);
+		}
+		put_wall_to_window(config, &config->ray, &config->draw, &config->img, x);
 		x++;
 	}
 }

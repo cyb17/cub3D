@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:34:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/18 16:50:41 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:09:09 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ int	find_color(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void    print_all_data(t_gameconfig *config)
+void    print_all_data(t_gameconfig *config, int x)
 {
     t_draw        *d = &config->draw;
     t_ray        *r = &config->ray;
     t_player    *p = &config->player;
+	
+	printf("x= %d\n", x);
     printf("wall_height:%d\ndraw_start:%d\ndraw_end:%d\n", d->wall_height, d->draw_start, d->draw_end);
     printf("---RAY_INFO \nmap_x:%d\n", r->map_x);
     printf("map_y:%d\ncamera_x:%f\n", r->map_y, p->camera_x);
@@ -73,8 +75,10 @@ void    print_all_data(t_gameconfig *config)
     printf("camera_x: %f\n\n----------------\n", p->camera_x);
 }
 
-void	put_wall_to_window(t_ray *r, t_draw *d, t_imge *img, int x)
+void	put_wall_to_window(t_gameconfig *config, t_ray *r, t_draw *d, t_imge *img, int x)
 {
+	// int	color = find_pixel_color_in_txt(config, d->txt_no, &d->pix_x, &d->pix_y);
+	(void)config;
 	while (d->draw_start <= d->draw_end)
 	{
 		if (r->side == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/21 16:07:01 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:09:30 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct s_draw
 	t_imge	*txt_ea;
 	int		c[3];
 	int		f[3];
+	int		pix_x;
+	int		pix_y;
 }		t_draw;
 
 typedef struct s_gameconfig
@@ -172,8 +174,12 @@ void	get_ply_wall_dist(t_ray *r, t_player *p);
 void	get_draw_info(t_draw *d, t_ray *r);
 void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
 int		find_color(int r, int g, int b);
-void	put_wall_to_window(t_ray *r, t_draw *d, t_imge *img, int x);
-void    print_all_data(t_gameconfig *config);
+void	put_wall_to_window(t_gameconfig *config, t_ray *r, t_draw *d, t_imge *img, int x);
+void    print_all_data(t_gameconfig *config, int x);
+
+// tool_2
+void	find_pixel_color_in_txt(t_gameconfig *config, t_draw *d, t_imge *txt);
+
 
 // keys_mouse_hook
 int		mouse_hook(void *param);
