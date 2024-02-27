@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_mouse_hook.c                                  :+:      :+:    :+:   */
+/*   keys_mouse_hook_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:19:18 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/27 09:41:48 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:35:38 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../includes/cub3D_bonus.h"
 
 int	mouse_hook(void *param)
 {
@@ -53,6 +53,7 @@ void	move_player_ns(int keysym, t_gameconfig *config, t_player *p)
 	{
 		p->mov_x = p->pos_x + (p->dir_x * MOV_SPEED);
 		p->mov_y = p->pos_y + (p->dir_y * MOV_SPEED);
+		update_movex_or_movey(p);
 		if (config->map[(int)p->mov_x][(int)p->pos_y] == '0'
 			|| config->map[(int)p->mov_x][(int)p->pos_y] == p->start_pos)
 			p->pos_x += p->dir_x * MOV_SPEED;
@@ -64,6 +65,7 @@ void	move_player_ns(int keysym, t_gameconfig *config, t_player *p)
 	{
 		p->mov_x = p->pos_x - (p->dir_x * MOV_SPEED);
 		p->mov_y = p->pos_y - (p->dir_y * MOV_SPEED);
+		update_movex_or_movey(p);
 		if (config->map[(int)p->mov_x][(int)p->pos_y] == '0'
 			|| config->map[(int)p->mov_x][(int)p->pos_y] == p->start_pos)
 			p->pos_x -= p->dir_x * MOV_SPEED;
@@ -79,6 +81,7 @@ void	move_player_we(int keysym, t_gameconfig *config, t_player *p)
 	{
 		p->mov_x = p->pos_x - (p->dir_y * MOV_SPEED);
 		p->mov_y = p->pos_y + (p->dir_x * MOV_SPEED);
+		update_movex_or_movey(p);
 		if (config->map[(int)p->mov_x][(int)p->pos_y] == '0'
 			|| config->map[(int)p->mov_x][(int)p->pos_y] == p->start_pos)
 			p->pos_x -= p->dir_y * MOV_SPEED;
@@ -90,6 +93,7 @@ void	move_player_we(int keysym, t_gameconfig *config, t_player *p)
 	{
 		p->mov_x = (p->pos_x + (p->dir_y * MOV_SPEED));
 		p->mov_y = (p->pos_y - (p->dir_x * MOV_SPEED));
+		update_movex_or_movey(p);
 		if (config->map[(int)p->mov_x][(int)p->pos_y] == '0'
 			|| config->map[(int)p->mov_x][(int)p->pos_y] == p->start_pos)
 			p->pos_x += p->dir_y * MOV_SPEED;
@@ -112,6 +116,14 @@ int	key_hook(int keysym, t_gameconfig *config)
 	rotation_camera(keysym, config, p);
 	move_player_ns(keysym, config, p);
 	move_player_we(keysym, config, p);
+	if (keysym == XK_m)
+	{
+		if (config->minimap == 0)
+			config->minimap = 1;
+		else
+			config->minimap = 0;
+		display(config, &config->img);
+	}
 	if (keysym == XK_w || keysym == XK_s || keysym == XK_a || keysym == XK_d)
 		display(config, &config->img);
 	return (0);

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/27 18:22:48 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:33:44 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../includes/cub3D_bonus.h"
+
 
 int	put_pixel_col(t_gameconfig *c, t_imge *txt, int x)
 {
@@ -63,13 +64,16 @@ void	loop_ray(t_gameconfig *config)
 void	display(t_gameconfig *config, t_imge *img)
 {
 	loop_ray(config);
+	if (config->minimap == 1)
+		create_minicard(&config->player, config->map, img);
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
 }
 
 void	game_loop(t_gameconfig *config, t_imge *img)
 {
 	config->mlx = mlx_init();
-	config->mlx_w = mlx_new_window(config->mlx, SCREEN_W, SCREEN_H, "cub3D");
+	config->mlx_w = mlx_new_window(config->mlx, SCREEN_W, SCREEN_H,
+			"cub3D bonus");
 	img->img = mlx_new_image(config->mlx, SCREEN_W, SCREEN_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->ll, &img->ed);
 	if (load_all_texture(config, &config->draw) == -1)

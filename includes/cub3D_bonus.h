@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/27 17:49:03 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:28:49 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -25,15 +25,16 @@
 # include "../mlx_linux/mlx.h"
 # include "../mlx_linux/mlx_int.h"
 
-# define SCREEN_W 640
-# define SCREEN_H 480
+# define SCREEN_W 1280
+# define SCREEN_H 960
 # define ROT_SPEED 0.045
-# define MOV_SPEED 0.45
+# define MOV_SPEED 0.25
 
 // bpp = bit_by_pixels
 // ll = line_length
 // ed = endian => indique l'ordre d'interpretation des octets
-typedef struct	s_imge
+
+typedef struct s_imge
 {
 	void	*img;
 	char	*addr;
@@ -93,6 +94,7 @@ typedef struct s_draw
 	int		txt_x;
 }		t_draw;
 
+
 typedef struct s_gameconfig
 {
 	t_list		*file;
@@ -106,6 +108,7 @@ typedef struct s_gameconfig
 	char		*f;
 	char		*c;
 	int			nb_element;
+	int			minimap;
 	t_player	player;
 	t_ray		ray;
 	t_draw		draw;
@@ -191,5 +194,9 @@ void	print_all_data(t_gameconfig *config);
 void	find_wall_x(t_gameconfig *c, t_imge *txt);
 t_imge	*find_txt_side(t_gameconfig *c);
 int		find_txt_pixel_color(t_imge *txt, int x, int y);
+
+// BONUS
+void	update_movex_or_movey(t_player *p);
+void	create_minicard(t_player *p, char **map, t_imge *img);
 
 #endif
