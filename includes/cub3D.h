@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/28 10:47:50 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/28 15:18:01 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void	get_draw_info(t_draw *d, t_ray *r);
 void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
 int		find_color(int r, int g, int b);
 void	put_wall_to_window(t_gameconfig *c, t_imge *img, int x);
-void	print_all_data(t_gameconfig *config);
+void	print_all_data(t_gameconfig *config, int x);
 
 // tools_2
 void	find_wall_x(t_gameconfig *c, t_imge *txt);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/27 18:22:48 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:19:41 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@ int	put_pixel_col(t_gameconfig *c, t_imge *txt, int x)
 		return (err("Error!\n", "Malloc failed: put_pixel_col\n", ""));
 	scale = 1.0 * txt->height / c->draw.wall_height;
 	i = -1;
+	int tmp = 0;
+	if (c->draw.wall_height > SCREEN_H)
+		tmp = c->draw.wall_height / 2 - SCREEN_H / 2 - 1;
 	while (++i < c->draw.wall_height)
+	{
 		column[i] = find_txt_pixel_color(txt, (int)c->draw.txt_x,
-				(int)(i * scale));
+				(int)(tmp * scale));
+		tmp++;
+	}
 	i = -1;		
 	while (++i < c->draw.draw_start)
 		my_mlx_pixel_put(&c->img, x, i,
@@ -55,6 +61,8 @@ void	loop_ray(t_gameconfig *config)
 		get_draw_info(&config->draw, &config->ray);
 		txt = find_txt_side(config);
 		find_wall_x(config, txt);
+		if (x < 50)
+			print_all_data(config, x);
 		put_pixel_col(config, txt, x);
 		x++;
 	}

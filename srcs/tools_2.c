@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:32:34 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/28 10:50:52 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:35:44 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void	find_wall_x(t_gameconfig *c, t_imge *txt)
 		c->draw.wall_x = c->player.pos_x + c->ray.p_w_dist * c->ray.ray_x;
 	c->draw.wall_x -= floor(c->draw.wall_x);
 	c->draw.txt_x = c->draw.wall_x * txt->width;
-	if (c->ray.side == 0 && c->ray.ray_x > 0)
-		c->draw.txt_x = txt->width - c->draw.txt_x - 1;
-	if (c->ray.side == 1 && c->ray.ray_y < 0)
+	if ((c->ray.side == 0 && c->ray.ray_x > 0)
+		|| (c->ray.side == 1 && c->ray.ray_y < 0))
 		c->draw.txt_x = txt->width - c->draw.txt_x - 1;
 }
 
