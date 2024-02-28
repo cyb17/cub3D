@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/27 18:28:49 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:48:39 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ typedef struct s_draw
 	t_imge	*txt_ea;
 	int		c[3];
 	int		f[3];
-	int		pix_x;
-	int		pix_y;
-	int		color;
 	double	wall_x;
 	int		txt_x;
 }		t_draw;

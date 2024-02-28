@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_gameconfig_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/27 18:29:21 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:48:21 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	init_draw(t_draw *draw)
 	draw->txt_ea = NULL;
 	ft_memset(draw->c,0, 3);
 	ft_memset(draw->f,0, 3);
+	draw->wall_x = 0.0;
+	draw->txt_x = 0;
 }
 
 static void	init_ray(t_ray *r)
