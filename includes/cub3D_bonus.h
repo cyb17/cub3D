@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 15:42:34 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/29 17:29:51 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "../mlx_linux/mlx.h"
 # include "../mlx_linux/mlx_int.h"
 
-# define SCREEN_W 1280
-# define SCREEN_H 960
+# define SCREEN_W 640
+# define SCREEN_H 480
 # define ROT_SPEED 0.045
 # define MOV_SPEED 0.25
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:23:14 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/29 12:56:39 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:39:46 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,18 @@ void	create_case(t_imge *img, int x, int y, int color)
 	int	case_y;
 	int	end_x;
 	int	end_y;
+	int	minimap_h;
+	int	minimap_w;
 
-	case_x = 30 + 20 * x;
-	case_y = 30 + 20 * y;
-	end_x = case_x + 20;
-	end_y = case_y + 20;
+	minimap_h = SCREEN_H / 60;
+	minimap_w = SCREEN_W / 60;
+	case_x = 30 + minimap_w * x;
+	case_y = 30 + minimap_h * y;
+	end_x = case_x + minimap_w;
+	end_y = case_y + minimap_h;
 	while (case_x < end_x)
 	{
-		case_y = 30 + 20 * y;
+		case_y = 30 + minimap_h * y;
 		while (case_y < end_y)
 		{
 			my_mlx_pixel_put(img, case_x, case_y, color);
@@ -48,7 +52,6 @@ void	create_case(t_imge *img, int x, int y, int color)
 		case_x++;
 	}
 }
-
 
 void	create_minicard(t_player *p, char **map, t_imge *img)
 {
@@ -67,6 +70,8 @@ void	create_minicard(t_player *p, char **map, t_imge *img)
 				create_case(img, x, y, find_color(0, 128, 255));
 			if (map[y][x] == '1')
 				create_case(img, x, y, find_color(0, 51, 102));
+			if (map[y][x] == '2')
+				create_case(img, x, y, find_color(0, 0, 0));
 			x++;
 		}
 		y++;
