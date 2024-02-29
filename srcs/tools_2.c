@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:32:34 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/28 14:35:44 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/29 13:30:22 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,30 @@ int	find_txt_pixel_color(t_imge *txt, int x, int y)
 	i = (y * txt->ll) / 4 + x;
 	color = (int *)txt->addr;
 	return (color[i]);
+}
+
+int	*store_pixel_color_column(t_gameconfig *c, t_imge *txt)
+{
+	double	scale;
+	int		*tmp;
+	int		i;
+	double	y;
+
+	tmp = (int *)malloc(sizeof(int) * c->draw.wall_height);
+	if (!tmp)
+		return (NULL);
+	scale = 1.0 * txt->height / c->draw.wall_height;
+	y = 0;
+	if (c->draw.wall_height > SCREEN_H)
+		y = (c->draw.wall_height - SCREEN_H) / 2;
+	i = -1;
+	while (++i < c->draw.wall_height)
+	{
+		tmp[i] = find_txt_pixel_color(txt, (int)c->draw.txt_x,
+				(int)(y * scale));
+		y++;
+		if ((int)(y * scale) >= txt->height)
+			break ;
+	}
+	return (tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/28 10:48:39 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/29 13:29:47 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void	print_all_data(t_gameconfig *config);
 void	find_wall_x(t_gameconfig *c, t_imge *txt);
 t_imge	*find_txt_side(t_gameconfig *c);
 int		find_txt_pixel_color(t_imge *txt, int x, int y);
+int		*store_pixel_color_column(t_gameconfig *c, t_imge *txt);
 
 // BONUS
 void	update_movex_or_movey(t_player *p);

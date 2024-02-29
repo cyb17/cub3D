@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 12:50:11 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:32:09 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,13 @@
 
 int	put_pixel_col(t_gameconfig *c, t_imge *txt, int x)
 {
-	double	scale;
-	int		*column;
-	int		i;
-	int		j;
-	double	k;
+	int	*column;
+	int	i;
+	int	j;
 
-	column = (int *)malloc(sizeof(int) * c->draw.wall_height);
+	column = store_pixel_color_column(c, txt);
 	if (!column)
 		return (err("Error!\n", "Malloc failed: put_pixel_col\n", ""));
-	scale = 1.0 * txt->height / c->draw.wall_height;
-	if (c->draw.wall_height > SCREEN_H)
-		k = (c->draw.wall_height - SCREEN_H) / 2;
-	else
-		k = 0;
-	i = -1;
-	while (++i < c->draw.wall_height)
-	{
-		column[i] = find_txt_pixel_color(txt, (int)c->draw.txt_x,
-				(int)(k * scale));
-		k++;
-		if ((int)(k * scale) >= txt->height)
-			break ;
-	}
 	i = -1;
 	while (++i < c->draw.draw_start)
 		my_mlx_pixel_put(&c->img, x, i,
