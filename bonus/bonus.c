@@ -6,7 +6,7 @@
 /*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:23:14 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/27 18:58:58 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:51:49 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,15 @@ void	create_minicard(t_player *p, char **map, t_imge *img)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == '0' || map[y][x] == p->start_pos)
+			if (map[y][x] == p->start_pos)
+			{
+				create_case(img, x, y, find_color(255, 255, 255));
+			}
+			if (map[y][x] == '0')
 			{
 				create_case(img, x, y, find_color(0, 128, 255));
-				if (map[y][x] == p->start_pos)
-					create_case_bis(img, p->pos_y, p->pos_x, find_color(255, 255, 255));
+				// if (map[y][x] == p->start_pos)
+				// 	create_case_bis(img, p->pos_y, p->pos_x, find_color(255, 255, 255));
 			}
 			if (map[y][x] == '1')
 				create_case(img, x, y, find_color(0, 51, 102));
