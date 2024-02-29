@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/28 10:48:21 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/29 15:42:56 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	init_draw(t_draw *draw)
 	draw->txt_so = NULL;
 	draw->txt_we = NULL;
 	draw->txt_ea = NULL;
+	draw->do_open = NULL;
+	draw->do_close = NULL;
 	ft_memset(draw->c,0, 3);
 	ft_memset(draw->f,0, 3);
 	draw->wall_x = 0.0;
@@ -68,6 +70,7 @@ void	init_gameconfig(t_gameconfig *config)
 	config->f = NULL;
 	config->c = NULL;
 	config->minimap = 0;
+	config->door = 0;
 	config->nb_element = 0;
 	config->player.pos_x = 0.0;
 	config->player.pos_y = 0.0;

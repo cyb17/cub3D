@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 13:27:49 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:31:03 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ int		check_gameconfig_content(t_gameconfig *config);
 int		element_already_present(char *line, t_gameconfig *config);
 int		with_correct_info(char *line);
 int		is_element(char *line);
-char	*ft_strim_path(char *path);
 
 // is_surrounded_by_wall
 int		is_surrounded_by_walls(char **map, int size, int i, int j);
@@ -142,13 +141,48 @@ char	*delete_white_space(char *line);
 
 /* EXECUTION */
 
-// init_struct
+// game_loop
+int		put_pixel_col(t_gameconfig *c, t_imge *txt, int x);
+void	loop_ray(t_gameconfig *config);
+void	display(t_gameconfig *config, t_imge *img);
+void	game_loop(t_gameconfig *config, t_imge *img);
+
+// garbage_collector
+void	destroye_img(t_gameconfig *config, t_draw *d);
+void	free_img_ptr(t_gameconfig *config);
+void	clear_list_ptr(t_list **list);
+void	garbage_collector(t_gameconfig *src);
+
+// init_gameconfig
 void	init_gameconfig(t_gameconfig *config);
+
+// keys_mouse_hook
+int		mouse_hook(void *param);
+void	rotation_camera(int keysym, t_gameconfig *config, t_player *p);
+void	move_player_ns(int keysym, t_gameconfig *config, t_player *p);
+void	move_player_we(int keysym, t_gameconfig *config, t_player *p);
+int		key_hook(int keysym, t_gameconfig *config);
+
+// load_imge
+t_imge	*load_img(void *mlx, char *path);
+int		load_all_texture(t_gameconfig *config, t_draw *d);
 
 // raycasting
 void	update_side(t_ray *r, t_player *ply);
 void	find_ray(t_ray *r, t_player *ply, int x);
 void	ft_DDA(t_ray *r, char **map);
+
+// tools_2
+void	find_wall_x(t_gameconfig *c, t_imge *txt);
+t_imge	*find_txt_side(t_gameconfig *c);
+int		find_txt_pixel_color(t_imge *txt, int x, int y);
+int		*store_pixel_color_column(t_gameconfig *c, t_imge *txt);
+
+// tools
+void	get_ply_wall_dist(t_ray *r, t_player *p);
+void	get_draw_info(t_draw *d, t_ray *r);
+void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
+int		find_color(int r, int g, int b);
 
 // update_gameconfig
 char	*ft_strim_path(char *path);
@@ -156,38 +190,5 @@ void	find_start_position(t_gameconfig *config);
 void	init_dir_plane(t_gameconfig *config);
 void	get_c_or_f_info(char *str, int tab[3]);
 void	update_gameconfig(t_gameconfig *config);
-
-// game_loop
-void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img);
-void	loop_ray(t_gameconfig *config);
-void	game_loop(t_gameconfig *config, t_imge *img);
-
-// load_imge
-t_imge	*load_img(void *mlx, char *path);
-int		load_all_texture(t_gameconfig *config, t_draw *d);
-
-// garbage_collector
-void	destroye_img(t_gameconfig *config, t_draw *d);
-void	clear_list_ptr(t_list **list);
-void	garbage_collector(t_gameconfig *src);
-
-// keys_mouse_hook
-int		mouse_hook(void *param);
-int		key_hook(int keysym, t_gameconfig *config);
-void	display(t_gameconfig *config, t_imge *img);
-
-// tools
-void	get_ply_wall_dist(t_ray *r, t_player *p);
-void	get_draw_info(t_draw *d, t_ray *r);
-void	my_mlx_pixel_put(t_imge *img, int x, int y, int color);
-int		find_color(int r, int g, int b);
-void	put_wall_to_window(t_gameconfig *c, t_imge *img, int x);
-void	print_all_data(t_gameconfig *config, int x);
-
-// tools_2
-void	find_wall_x(t_gameconfig *c, t_imge *txt);
-t_imge	*find_txt_side(t_gameconfig *c);
-int		find_txt_pixel_color(t_imge *txt, int x, int y);
-int		*store_pixel_color_column(t_gameconfig *c, t_imge *txt);
 
 #endif

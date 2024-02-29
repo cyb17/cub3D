@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:57:13 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/23 17:49:25 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:39:36 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void	ft_DDA(t_ray *r, char **map)
 		}
 		if (map[r->map_x][r->map_y] == '1')
 			r->hit = 1;
-	}
+		else if (map[r->map_x][r->map_y] == '2')
+			r->hit = 2;
+}
 }

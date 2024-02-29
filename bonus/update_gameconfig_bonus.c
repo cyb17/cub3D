@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_gameconfig_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:25:02 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/23 17:49:39 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:19:59 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strim_path(char *path)
 	tmp = path;
 	while (path[i] && (path[i] == ' ' || path[i] == '\t'))
 		i++;
-	while (path[j] && (path[j] == ' ' || path[j] == '\t'))
+	while (path[j] && (path[j] == ' ' || path[j] == '\t' || path[j] == '\n'))
 		j--;
 	k = 0;
 	while (i <= j)

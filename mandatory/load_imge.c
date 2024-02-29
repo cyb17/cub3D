@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:03:03 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/19 16:15:56 by yachen           ###   ########.fr       */
+/*   Updated: 2024/02/29 14:28:39 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ t_imge	*load_img(void *mlx, char *path)
 
 int	load_all_texture(t_gameconfig *config, t_draw *d)
 {
-	d->txt_no = load_img(config->mlx, "./textures/north.xpm");
+	d->txt_no = load_img(config->mlx, config->no);
 	if (!d->txt_no)
 		return (err("load texture NO failed\n", "", ""));
-	d->txt_so = load_img(config->mlx, "./textures/south.xpm");
+	d->txt_so = load_img(config->mlx, config->so);
 	if (!d->txt_so)
 		return (err("load texture SO failed\n", "", ""));
-	d->txt_we = load_img(config->mlx, "./textures/west.xpm");
+	d->txt_we = load_img(config->mlx, config->we);
 	if (!d->txt_we)
 		return (err("load texture WE failed\n", "", ""));
-	d->txt_ea = load_img(config->mlx, "./textures/east.xpm");
+	d->txt_ea = load_img(config->mlx, config->ea);
 	if (!d->txt_ea)
 		return (err("load texture EA failed\n", "", ""));
 	d->txt_no->addr = mlx_get_data_addr(d->txt_no->img, &d->txt_no->bpp, &d->txt_no->ll, &d->txt_no->ed);

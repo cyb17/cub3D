@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_mouse_hook_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:19:18 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/27 18:35:38 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:04:20 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ void	move_player_ns(int keysym, t_gameconfig *config, t_player *p)
 		p->mov_y = p->pos_y + (p->dir_y * MOV_SPEED);
 		update_movex_or_movey(p);
 		if (config->map[(int)p->mov_x][(int)p->pos_y] == '0'
-			|| config->map[(int)p->mov_x][(int)p->pos_y] == p->start_pos)
+			|| config->map[(int)p->mov_x][(int)p->pos_y] == p->start_pos
+			|| (config->map[(int)p->mov_x][(int)p->pos_y] == '2' && config->door == 1))
 			p->pos_x += p->dir_x * MOV_SPEED;
 		if (config->map[(int)p->pos_x][(int)p->mov_y] == '0'
-			|| config->map[(int)p->pos_x][(int)p->mov_y] == p->start_pos)
+			|| config->map[(int)p->pos_x][(int)p->mov_y] == p->start_pos
+			|| (config->map[(int)p->pos_x][(int)p->mov_y] == '2' && config->door == 1))
 			p->pos_y += p->dir_y * MOV_SPEED;
 	}
 	else if (keysym == XK_s)
@@ -103,6 +105,22 @@ void	move_player_we(int keysym, t_gameconfig *config, t_player *p)
 	}
 }
 
+void	check_door(t_gameconfig *config, t_player *p)
+{
+	p->mov_x = p->pos_x + p->dir_x;
+	p->mov_y = p->pos_y + p->dir_y;
+	update_movex_or_movey(p);
+	if (config->map[(int)p->mov_x][(int)p->pos_y] == '2'
+		|| config->map[(int)p->pos_x][(int)p->mov_y] == '2')
+	{
+		if (config->door == 0)
+			config->door = 1;
+		else	
+			config->door = 0;
+	}
+	display(config, &config->img);
+}
+
 int	key_hook(int keysym, t_gameconfig *config)
 {
 	t_player	*p;
@@ -123,6 +141,15 @@ int	key_hook(int keysym, t_gameconfig *config)
 		else
 			config->minimap = 0;
 		display(config, &config->img);
+	}
+	if (keysym == XK_space)
+	{
+		check_door(config, &config->player);
+		// if (config->door == 0)
+		// 	config->door = 1;
+		// else
+		// 	config->door = 0;
+		// display(config, &config->img);
 	}
 	if (keysym == XK_w || keysym == XK_s || keysym == XK_a || keysym == XK_d)
 		display(config, &config->img);

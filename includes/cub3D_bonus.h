@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 13:29:47 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:42:34 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ typedef struct s_draw
 	t_imge	*txt_so;
 	t_imge	*txt_we;
 	t_imge	*txt_ea;
+	t_imge	*do_open;
+	t_imge	*do_close;
 	int		c[3];
 	int		f[3];
 	double	wall_x;
@@ -106,6 +108,7 @@ typedef struct s_gameconfig
 	char		*c;
 	int			nb_element;
 	int			minimap;
+	int			door;
 	t_player	player;
 	t_ray		ray;
 	t_draw		draw;

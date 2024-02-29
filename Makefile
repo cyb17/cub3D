@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+         #
+#    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/02/27 17:38:33 by jp-de-to         ###   ########.fr        #
+#    Updated: 2024/02/29 14:51:39 by yachen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ BONUS = main_bonus garbage_collector_bonus init_gameconfig_bonus update_gameconf
 		raycasting_bonus load_imge_bonus tools_bonus keys_mouse_hook_bonus game_loop_bonus \
 		bonus tools_2_bonus
 		
-SRC = $(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
-	  $(addsuffix .c, $(addprefix srcs/, $(EXECUTION))) 
+SRC = $(addsuffix .c, $(addprefix mandatory/parsing/, $(PARSING))) \
+	  $(addsuffix .c, $(addprefix mandatory/, $(EXECUTION))) 
 
 BONUS_SRC = $(addsuffix .c, $(addprefix bonus/parsing/, $(PARSING_BONUS))) \
 	  		$(addsuffix .c, $(addprefix bonus/, $(BONUS))) 

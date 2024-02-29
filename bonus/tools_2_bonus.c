@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools_2_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:32:34 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 13:27:20 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:44:25 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	find_wall_x(t_gameconfig *c, t_imge *txt)
 
 t_imge	*find_txt_side(t_gameconfig *c)
 {
+	if (c->ray.hit == 2 && c->door == 0)
+		return (c->draw.do_close);
+	if (c->ray.hit == 2 && c->door == 1)
+		return (c->draw.do_open);
 	if (c->ray.side == 1)
 	{
 		if (c->ray.ray_y < 0)
