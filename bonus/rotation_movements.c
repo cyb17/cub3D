@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 13:35:49 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 13:48:24 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 14:37:49 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,11 @@ void	move_player_ns(int keysym, t_gameconfig *config, t_player *p)
 		get_player_mov(p, 1);
 		if (config->map[(int)p->mov_x][(int)p->pos_y] == '0'
 			|| config->map[(int)p->mov_x][(int)p->pos_y] == p->start_pos
-			|| (config->map[(int)p->mov_x][(int)p->pos_y] == '2'
-				&& config->door == 1))
+			|| config->map[(int)p->mov_x][(int)p->pos_y] == '2')
 			p->pos_x += p->dir_x * MOV_SPEED;
 		if (config->map[(int)p->pos_x][(int)p->mov_y] == '0'
 			|| config->map[(int)p->pos_x][(int)p->mov_y] == p->start_pos
-			|| (config->map[(int)p->pos_x][(int)p->mov_y] == '2'
-				&& config->door == 1))
+			|| config->map[(int)p->pos_x][(int)p->mov_y] == '2')
 			p->pos_y += p->dir_y * MOV_SPEED;
 	}
 	else if (keysym == XK_s)

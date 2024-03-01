@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:57:13 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 12:04:44 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 14:36:42 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ void	ft_dda(t_ray *r, char **map)
 			r->hit = 1;
 		else if (map[r->map_x][r->map_y] == '2')
 			r->hit = 2;
+		else if (map[r->map_x][r->map_y] == '3')
+			r->hit = 3;
 	}
 }

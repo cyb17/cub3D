@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:19:18 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/03/01 13:37:34 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 14:38:17 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	check_door(t_gameconfig *config, t_player *p)
 	p->mov_x = p->pos_x + p->dir_x;
 	p->mov_y = p->pos_y + p->dir_y;
 	update_movex_or_movey(p);
-	if (config->map[(int)p->mov_x][(int)p->pos_y] == '2'
-		|| config->map[(int)p->pos_x][(int)p->mov_y] == '2')
-	{
-		if (config->door == 0)
-			config->door = 1;
-		else
-			config->door = 0;
-	}
+	if (config->map[(int)p->mov_x][(int)p->pos_y] == '2')
+		config->map[(int)p->mov_x][(int)p->pos_y] = '3';
+	else if (config->map[(int)p->pos_x][(int)p->mov_y] == '2')
+		config->map[(int)p->pos_x][(int)p->mov_y] = '3';
+	else if (config->map[(int)p->mov_x][(int)p->pos_y] == '3')
+		config->map[(int)p->mov_x][(int)p->pos_y] = '2';
+	else if (config->map[(int)p->pos_x][(int)p->mov_y] == '3')
+		config->map[(int)p->pos_x][(int)p->mov_y] = '2';
 	display(config, &config->img);
 }
 

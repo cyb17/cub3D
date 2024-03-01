@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 13:54:01 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 14:41:02 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 // bpp = bit_by_pixels
 // ll = line_length
 // ed = endian => indique l'ordre d'interpretation des octets
-
 typedef struct s_imge
 {
 	void	*img;
@@ -85,13 +84,7 @@ typedef struct s_draw
 	t_imge	*txt_so;
 	t_imge	*txt_we;
 	t_imge	*txt_ea;
-	t_imge	*do_open;
-	t_imge	*do_close;
-	int		c[3];
-	int		f[3];
-	double	wall_x;
-	int		txt_x;
-}		t_draw;
+}			t_draw;
 
 typedef struct s_gameconfig
 {
@@ -107,7 +100,6 @@ typedef struct s_gameconfig
 	char		*c;
 	int			nb_element;
 	int			minimap;
-	int			door;
 	t_player	player;
 	t_ray		ray;
 	t_draw		draw;
