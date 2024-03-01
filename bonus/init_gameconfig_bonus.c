@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_gameconfig_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 14:38:42 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:50:01 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	init_gameconfig(t_gameconfig *config)
 	config->c = NULL;
 	config->minimap = 0;
 	config->nb_element = 0;
+	config->player.old_c = '0';
 	config->player.pos_x = 0.0;
 	config->player.pos_y = 0.0;
 	config->player.dir_x = 0;

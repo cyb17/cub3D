@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
+#    By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/03/01 13:38:29 by yachen           ###   ########.fr        #
+#    Updated: 2024/03/01 16:37:10 by jp-de-to         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ $(BONUS_NAME): $(BONUS_OBJ)
 		@make -C ./mlx_linux
 		@echo "\e[32mCompiling cub3D with BONUS ---------"
 		@$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFTDIR)/libft.a $(LMX) -lXext -lX11 -lm -lz -o $(BONUS_NAME)
-		@echo "\e[32m----created with success : cub3D"
+		@echo "\e[32m----created with success : cub3D_bonus"
 		@echo "\e[32m===================================\n\e[0m"
 
 %.o: %.c

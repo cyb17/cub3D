@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 15:34:36 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:55:32 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	free_img_ptr(t_gameconfig *config)
 		free(config->draw.do_close);
 	if (config->draw.do_open)
 		free(config->draw.do_open);
-
 }
 
 void	clear_list_ptr(t_list **list)

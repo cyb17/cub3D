@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 11:06:53 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:58:02 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	display(t_gameconfig *config, t_imge *img)
 {
 	loop_ray(config);
 	if (config->minimap == 1)
-		create_minicard(&config->player, config->map, img);
+		create_minimap(&config->player, config->map, img);
 	mlx_put_image_to_window(config->mlx, config->mlx_w, img->img, 0, 0);
 }
 

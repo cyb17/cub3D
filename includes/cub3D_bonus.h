@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 15:22:23 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:54:53 by jp-de-to         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # include "../mlx_linux/mlx.h"
 # include "../mlx_linux/mlx_int.h"
 
-# define SCREEN_W 640
-# define SCREEN_H 480
+# define SCREEN_W 1920
+# define SCREEN_H 1080
 # define ROT_SPEED 0.045
-# define MOV_SPEED 0.25
+# define MOV_SPEED 0.5
 
 // bpp = bit_by_pixels
 // ll = line_length
@@ -42,6 +42,7 @@ typedef struct s_imge
 	int		bpp;
 	int		ll;
 	int		ed;
+	int		box_size;
 }				t_imge;
 
 typedef struct s_player
@@ -49,13 +50,16 @@ typedef struct s_player
 	char	start_pos;
 	double	pos_x;
 	double	pos_y;
+	double	old_posx;
+	double	old_posy;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
 	double	camera_x;
 	double	mov_x;
-	double	mov_y;		
+	double	mov_y;
+	char	old_c;
 }			t_player;
 
 typedef struct s_ray
@@ -91,7 +95,6 @@ typedef struct s_draw
 	double	wall_x;
 	int		txt_x;
 }			t_draw;
-
 
 typedef struct s_gameconfig
 {
@@ -201,7 +204,8 @@ void	move_player_ns(int keysym, t_gameconfig *config, t_player *p);
 void	move_player_we(int keysym, t_gameconfig *config, t_player *p);
 
 // minimap
-void	create_case(t_imge *img, int x, int y, int color);
-void	create_minicard(t_player *p, char **map, t_imge *img);
+void	create_box(t_imge *img, int x, int y, int color);
+void	create_minimap(t_player *p, char **map, t_imge *img);
+int		find_minimap_box_scale(char **map, int x, int y);
 
 #endif
