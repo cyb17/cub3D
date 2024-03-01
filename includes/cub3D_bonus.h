@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 14:41:02 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:22:23 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,14 @@ typedef struct s_draw
 	t_imge	*txt_so;
 	t_imge	*txt_we;
 	t_imge	*txt_ea;
+	t_imge	*do_open;
+	t_imge	*do_close;
+	int		c[3];
+	int		f[3];
+	double	wall_x;
+	int		txt_x;
 }			t_draw;
+
 
 typedef struct s_gameconfig
 {

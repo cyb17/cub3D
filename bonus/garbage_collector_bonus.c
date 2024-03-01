@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 12:05:05 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:34:36 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	destroye_img(t_gameconfig *config, t_draw *d)
 		mlx_destroy_image(config->mlx, d->txt_we->img);
 	if (d->txt_ea)
 		mlx_destroy_image(config->mlx, d->txt_ea->img);
+	if (d->do_close)
+		mlx_destroy_image(config->mlx, d->do_close->img);
+	if (d->do_open)
+		mlx_destroy_image(config->mlx, d->do_open->img);
 }
 
 void	free_img_ptr(t_gameconfig *config)
@@ -34,6 +38,11 @@ void	free_img_ptr(t_gameconfig *config)
 		free(config->draw.txt_we);
 	if (config->draw.txt_ea)
 		free(config->draw.txt_ea);
+	if (config->draw.do_close)
+		free(config->draw.do_close);
+	if (config->draw.do_open)
+		free(config->draw.do_open);
+
 }
 
 void	clear_list_ptr(t_list **list)

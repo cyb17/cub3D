@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:43:27 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 12:07:42 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:30:38 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	error_cases(char **map, int row, int col, int *ply_pos)
 	}
 	if (map[row][col] != ' ' && map[row][col] != '1' && map[row][col] != '2'
 		&& map[row][col] != '0' && map[row][col] != 'N' && map[row][col] != 'S'
-		&& map[row][col] != 'W' && map[row][col] != 'E')
+		&& map[row][col] != 'W' && map[row][col] != 'E' && map[row][col] != '3')
 		return (err("Error!\nWrong map content: ", map[row], "\n"));
 	if (map[row][col] == 'N' || map[row][col] == 'S' || map[row][col] == 'W'
 		|| map[row][col] == 'E')
@@ -44,8 +44,9 @@ int	check_wall(char **map, int size)
 		while (map[i][j])
 		{
 			if ((map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == '2')
-				&& (!is_surrounded_by_walls(map, size, i, j)))
+				|| map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == '2'
+				|| map[i][j] == '3')
+				&& !is_surrounded_by_walls(map, size, i, j))
 				return (err("Error!\nMap not closed or space in map\n", "", ""));
 			j++;
 		}
