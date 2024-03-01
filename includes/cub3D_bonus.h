@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 12:15:52 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 13:54:01 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	get_c_or_f_info(char *str, int tab[3]);
 void	update_gameconfig(t_gameconfig *config);
 
 // game_loop
-void	put_floor_and_ceiling_to_window(int c[3], int f[3], t_imge *img);
+void	display(t_gameconfig *config, t_imge *img);
 void	loop_ray(t_gameconfig *config);
 void	game_loop(t_gameconfig *config, t_imge *img);
 
@@ -177,8 +177,8 @@ void	garbage_collector(t_gameconfig *src);
 
 // keys_mouse_hook
 int		mouse_hook(void *param);
+void	check_door(t_gameconfig *config, t_player *p);
 int		key_hook(int keysym, t_gameconfig *config);
-void	display(t_gameconfig *config, t_imge *img);
 
 // tools
 void	get_ply_wall_dist(t_ray *r, t_player *p);
@@ -194,9 +194,14 @@ t_imge	*find_txt_side(t_gameconfig *c);
 int		find_txt_pixel_color(t_imge *txt, int x, int y);
 int		*store_pixel_color_column(t_gameconfig *c, t_imge *txt);
 
-// tools_3
-void	check_door(t_gameconfig *config, t_player *p);
+// rotation_movements
+void	rotation_camera(int keysym, t_gameconfig *config, t_player *p);
 void	update_movex_or_movey(t_player *p);
+void	get_player_mov(t_player *p, int i);
+void	move_player_ns(int keysym, t_gameconfig *config, t_player *p);
+void	move_player_we(int keysym, t_gameconfig *config, t_player *p);
+
+// minimap
 void	create_case(t_imge *img, int x, int y, int color);
 void	create_minicard(t_player *p, char **map, t_imge *img);
 

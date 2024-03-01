@@ -6,7 +6,7 @@
 #    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/03/01 12:13:30 by yachen           ###   ########.fr        #
+#    Updated: 2024/03/01 13:38:29 by yachen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ PARSING_BONUS = check_gamefile_bonus is_element_bonus is_surrounded_by_wall_bonu
 
 BONUS = main_bonus garbage_collector_bonus init_gameconfig_bonus update_gameconfig_bonus \
 		raycasting_bonus load_imge_bonus tools_bonus keys_mouse_hook_bonus game_loop_bonus \
-		tools_3_bonus tools_2_bonus
+		minimap_bonus tools_2_bonus rotation_movements
 		
 SRC = $(addsuffix .c, $(addprefix mandatory/parsing/, $(PARSING))) \
 	  $(addsuffix .c, $(addprefix mandatory/, $(EXECUTION))) 
