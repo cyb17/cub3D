@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_gamefile_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:11:48 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/23 17:46:41 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:08:45 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	make_map(t_list *start, char ***map)
 	size = find_size(start);
 	*map = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!*map)
-		return (err("Error!\n","Make_map: ", "Malloc failed\n"));
+		return (err("Error!\n", "Make_map: ", "Malloc failed\n"));
 	i = 0;
 	while (start)
 	{
@@ -70,7 +70,7 @@ int	make_map(t_list *start, char ***map)
 			while (start && is_empty_line(start->content))
 				start = start->next;
 			if (start != NULL)
-				return (err("Error\nToo much information after map description\n", "", ""));
+				return (err("Error\nToo much info after map\n", "", ""));
 		}
 		if (start)
 			start = start->next;
@@ -88,12 +88,13 @@ int	get_info_from_list(t_gameconfig *config)
 	tmp = config->file;
 	while (tmp)
 	{
-		if (is_element(tmp->content) && !element_already_present(tmp->content, config))
+		if (is_element(tmp->content)
+			&& !element_already_present(tmp->content, config))
 			rslt = 0;
 		else if (is_empty_line(tmp->content))
 			rslt = 0;
 		else if (is_start_map(tmp->content) && config->nb_element == 6)
-			return (make_map(tmp, &config->map)); 
+			return (make_map(tmp, &config->map));
 		else
 			rslt = -1;
 		if (rslt == -1)

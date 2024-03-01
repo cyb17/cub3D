@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_element.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:38:01 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/14 13:10:37 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:10:08 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	check_info(char *tmp)
 		i++;
 	}
 	tmp[end_digit] = '\0';
-	if (ft_atoi(tmp + start_digit) < 0  || ft_atoi(tmp + start_digit) > 255)
+	if (ft_atoi(tmp + start_digit) < 0 || ft_atoi(tmp + start_digit) > 255)
 		return (err("Error!\nColor code has to be between 0-255\n", "", ""));
 	return (0);
 }
@@ -93,12 +93,14 @@ int	is_element(char *line)
 	line = delete_white_space(line);
 	tmp = line;
 	if ((line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E'
-		|| line[0] == 'C' || line[0] == 'F') && (line[1] == ' ' || line[1] == '\t'))
+			|| line[0] == 'C' || line[0] == 'F') && (line[1] == ' '
+			|| line[1] == '\t'))
 	{
 		tmp++;
 		while (*tmp && (*tmp == ' ' || *tmp == '\t'))
-			tmp++;	
-		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
+			tmp++;
+		if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
+			|| line[0] == 'E')
 		{
 			while (*tmp && *tmp != ' ' && *tmp != '\t')
 				tmp++;

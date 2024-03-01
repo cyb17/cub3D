@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:25:25 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/08 14:28:17 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 11:15:36 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	err(char *msg1, char *msg2, char *msg3)
 {
 	int	rslt;
-	
+
 	while (*msg1)
 		rslt = write(2, msg1++, 1);
 	while (*msg2)
@@ -23,7 +23,7 @@ int	err(char *msg1, char *msg2, char *msg3)
 	while (*msg3)
 		rslt = write(2, msg3++, 1);
 	rslt = -1;
-	return(rslt);
+	return (rslt);
 }
 
 int	find_size(t_list *start)
@@ -45,7 +45,7 @@ int	is_start_map(char *line)
 		return (0);
 	while (*line)
 	{
-		if (*line != '1' && *line != ' ' && *line!= '\t' && *line != '\n')
+		if (*line != '1' && *line != ' ' && *line != '\t' && *line != '\n')
 			return (0);
 		line++;
 	}

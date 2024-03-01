@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:28:15 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/08 13:44:11 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 11:08:44 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,3 @@ int	is_surrounded_by_walls(char **map, int size, int i, int j)
 		return (1);
 	return (0);
 }
-

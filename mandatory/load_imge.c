@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:03:03 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 14:28:39 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 11:05:44 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,13 @@ int	load_all_texture(t_gameconfig *config, t_draw *d)
 	d->txt_ea = load_img(config->mlx, config->ea);
 	if (!d->txt_ea)
 		return (err("load texture EA failed\n", "", ""));
-	d->txt_no->addr = mlx_get_data_addr(d->txt_no->img, &d->txt_no->bpp, &d->txt_no->ll, &d->txt_no->ed);
-	d->txt_so->addr = mlx_get_data_addr(d->txt_so->img, &d->txt_so->bpp, &d->txt_so->ll, &d->txt_so->ed);
-	d->txt_we->addr = mlx_get_data_addr(d->txt_we->img, &d->txt_we->bpp, &d->txt_we->ll, &d->txt_we->ed);
-	d->txt_ea->addr = mlx_get_data_addr(d->txt_ea->img, &d->txt_ea->bpp, &d->txt_ea->ll, &d->txt_ea->ed);
+	d->txt_no->addr = mlx_get_data_addr(d->txt_no->img, &d->txt_no->bpp,
+			&d->txt_no->ll, &d->txt_no->ed);
+	d->txt_so->addr = mlx_get_data_addr(d->txt_so->img, &d->txt_so->bpp,
+			&d->txt_so->ll, &d->txt_so->ed);
+	d->txt_we->addr = mlx_get_data_addr(d->txt_we->img, &d->txt_we->bpp,
+			&d->txt_we->ll, &d->txt_we->ed);
+	d->txt_ea->addr = mlx_get_data_addr(d->txt_ea->img, &d->txt_ea->bpp,
+			&d->txt_ea->ll, &d->txt_ea->ed);
 	return (0);
 }

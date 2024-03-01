@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus.c                                            :+:      :+:    :+:   */
+/*   tools_3_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:23:14 by jp-de-to          #+#    #+#             */
-/*   Updated: 2024/02/29 17:39:46 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 12:14:22 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D_bonus.h"
+
+void	check_door(t_gameconfig *config, t_player *p)
+{
+	p->mov_x = p->pos_x + p->dir_x;
+	p->mov_y = p->pos_y + p->dir_y;
+	update_movex_or_movey(p);
+	if (config->map[(int)p->mov_x][(int)p->pos_y] == '2'
+		|| config->map[(int)p->pos_x][(int)p->mov_y] == '2')
+	{
+		if (config->door == 0)
+			config->door = 1;
+		else
+			config->door = 0;
+	}
+	display(config, &config->img);
+}
 
 // Collisions des murs 
 
@@ -77,4 +93,3 @@ void	create_minicard(t_player *p, char **map, t_imge *img)
 		y++;
 	}
 }
-

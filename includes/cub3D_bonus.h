@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 17:29:51 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 12:15:52 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct s_draw
 	int		txt_x;
 }		t_draw;
 
-
 typedef struct s_gameconfig
 {
 	t_list		*file;
@@ -145,7 +144,6 @@ int		is_start_map(char *line);
 int		is_empty_line(char *line);
 char	*delete_white_space(char *line);
 
-
 /* EXECUTION */
 
 // init_struct
@@ -154,7 +152,7 @@ void	init_gameconfig(t_gameconfig *config);
 // raycasting
 void	update_side(t_ray *r, t_player *ply);
 void	find_ray(t_ray *r, t_player *ply, int x);
-void	ft_DDA(t_ray *r, char **map);
+void	ft_dda(t_ray *r, char **map);
 
 // update_gameconfig
 char	*ft_strim_path(char *path);
@@ -196,8 +194,10 @@ t_imge	*find_txt_side(t_gameconfig *c);
 int		find_txt_pixel_color(t_imge *txt, int x, int y);
 int		*store_pixel_color_column(t_gameconfig *c, t_imge *txt);
 
-// BONUS
+// tools_3
+void	check_door(t_gameconfig *config, t_player *p);
 void	update_movex_or_movey(t_player *p);
+void	create_case(t_imge *img, int x, int y, int color);
 void	create_minicard(t_player *p, char **map, t_imge *img);
 
 #endif

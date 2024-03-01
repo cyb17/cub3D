@@ -6,13 +6,13 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:43:27 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 16:00:05 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 12:07:42 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D_bonus.h"
 
-static int error_cases(char **map, int row, int col, int *ply_pos)
+static int	error_cases(char **map, int row, int col, int *ply_pos)
 {
 	if (map[row][col] == '\t')
 	{
@@ -28,7 +28,7 @@ static int error_cases(char **map, int row, int col, int *ply_pos)
 		|| map[row][col] == 'E')
 		(*ply_pos)++;
 	if (*ply_pos > 1)
-		return (err("Error!\nThere is too many player in map\n", "",""));
+		return (err("Error!\nThere is too many player in map\n", "", ""));
 	return (0);
 }
 
@@ -74,7 +74,7 @@ int	check_map_content(char **map, int size)
 		row++;
 	}
 	if (ply_pos == 0)
-		return (err("Error!\nPlayer position missing\n", "",""));
+		return (err("Error!\nPlayer position missing\n", "", ""));
 	return (check_wall(map, size));
 }
 

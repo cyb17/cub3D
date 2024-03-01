@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 13:32:09 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:06:53 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	loop_ray(t_gameconfig *config)
 	while (x < SCREEN_W)
 	{
 		find_ray(&config->ray, &config->player, x);
-		ft_DDA(&config->ray, config->map);
+		ft_dda(&config->ray, config->map);
 		get_ply_wall_dist(&config->ray, &config->player);
 		get_draw_info(&config->draw, &config->ray);
 		txt = find_txt_side(config);

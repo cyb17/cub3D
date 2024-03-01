@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:28:54 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/29 14:31:03 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 12:11:23 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // bpp = bit_by_pixels
 // ll = line_length
 // ed = endian => indique l'ordre d'interpretation des octets
-typedef struct	s_imge
+typedef struct s_imge
 {
 	void	*img;
 	char	*addr;
@@ -138,7 +138,6 @@ int		is_start_map(char *line);
 int		is_empty_line(char *line);
 char	*delete_white_space(char *line);
 
-
 /* EXECUTION */
 
 // game_loop
@@ -170,7 +169,7 @@ int		load_all_texture(t_gameconfig *config, t_draw *d);
 // raycasting
 void	update_side(t_ray *r, t_player *ply);
 void	find_ray(t_ray *r, t_player *ply, int x);
-void	ft_DDA(t_ray *r, char **map);
+void	ft_dda(t_ray *r, char **map);
 
 // tools_2
 void	find_wall_x(t_gameconfig *c, t_imge *txt);

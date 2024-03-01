@@ -6,7 +6,7 @@
 /*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:40:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/28 15:18:19 by yachen           ###   ########.fr       */
+/*   Updated: 2024/03/01 11:07:29 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	init_draw(t_draw *draw)
 	draw->txt_so = NULL;
 	draw->txt_we = NULL;
 	draw->txt_ea = NULL;
-	ft_memset(draw->c,0, 3);
-	ft_memset(draw->f,0, 3);
+	ft_memset(draw->c, 0, 3);
+	ft_memset(draw->f, 0, 3);
 	draw->wall_x = 0.0;
 	draw->txt_x = 0;
 }
@@ -41,7 +41,7 @@ static void	init_draw(t_draw *draw)
 static void	init_ray(t_ray *r)
 {
 	r->map_x = 0;
-	r->map_y= 0;
+	r->map_y = 0;
 	r->ray_x = 0.0;
 	r->ray_y = 0.0;
 	r->delta_x = 0.0;

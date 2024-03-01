@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:08:53 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/23 17:48:33 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:05:05 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	destroye_img(t_gameconfig *config, t_draw *d)
 		mlx_destroy_image(config->mlx, d->txt_we->img);
 	if (d->txt_ea)
 		mlx_destroy_image(config->mlx, d->txt_ea->img);
-	// if (&config->img)
-	// 	mlx_destroy_image(config->mlx, config->img.img);
 }
 
 void	free_img_ptr(t_gameconfig *config)

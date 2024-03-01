@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:57:13 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/19 14:40:46 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:06:53 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-void	update_side(t_ray *r, t_player * ply)
+void	update_side(t_ray *r, t_player *ply)
 {
 	if (r->ray_x < 0)
 	{
@@ -54,7 +54,7 @@ void	find_ray(t_ray *r, t_player *ply, int x)
 	update_side(r, ply);
 }
 
-void	ft_DDA(t_ray *r, char **map)
+void	ft_dda(t_ray *r, char **map)
 {
 	r->hit = 0;
 	while (r->hit == 0)

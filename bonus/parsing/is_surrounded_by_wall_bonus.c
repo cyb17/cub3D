@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_surrounded_by_wall_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:28:15 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/23 17:47:09 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:07:49 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,3 @@ int	is_surrounded_by_walls(char **map, int size, int i, int j)
 		return (1);
 	return (0);
 }
-

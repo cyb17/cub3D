@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tools_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:25:25 by yachen            #+#    #+#             */
-/*   Updated: 2024/02/23 17:47:33 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:07:08 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_start_map(char *line)
 		return (0);
 	while (*line)
 	{
-		if (*line != '1' && *line != ' ' && *line!= '\t' && *line != '\n')
+		if (*line != '1' && *line != ' ' && *line != '\t' && *line != '\n')
 			return (0);
 		line++;
 	}
