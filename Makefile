@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+         #
+#    By: yachen <yachen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 10:29:21 by yachen            #+#    #+#              #
-#    Updated: 2024/03/01 16:37:10 by jp-de-to         ###   ########.fr        #
+#    Updated: 2025/01/10 10:23:50 by yachen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
+
 BONUS_NAME = cub3D_bonus
 
 CC = gcc

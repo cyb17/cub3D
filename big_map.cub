@@ -1,6 +1,7 @@
 N    ./textures/north.xpm      
 
 
+
 S          ./textures/south.xpm
 W            ./textures/west.xpm
 E         ./textures/east.xpm

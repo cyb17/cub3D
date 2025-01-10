@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jp-de-to <jp-de-to@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yachen <yachen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 12:28:47 by yachen            #+#    #+#             */
-/*   Updated: 2024/03/01 16:58:02 by jp-de-to         ###   ########.fr       */
+/*   Updated: 2025/01/10 10:26:13 by yachen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,4 @@ void	game_loop(t_gameconfig *config, t_imge *img)
 	mlx_hook(config->mlx_w, 17, 0, mouse_hook, config);
 	mlx_loop(config->mlx);
 }
+
